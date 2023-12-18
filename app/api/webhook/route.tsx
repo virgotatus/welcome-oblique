@@ -2,7 +2,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import sendEmail from "@/app/send-email/sendEmail";
-import Chat from "@/app/gpt/openaiChat";
+import Chat from "@/app/_gpt/openaiChat";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
