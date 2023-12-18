@@ -10,9 +10,9 @@ interface EmailProps {
 async function sendEmail({ name, email, message }: EmailProps) {
   const result = await resend.emails.send({
     from: "Elon <email@ideaplayer.shop>",
-    to: [email],
-    subject: "hello world",
-    text: "it works!",
+    to: [`${name} <${email}>`],
+    subject: "炼丹",
+    text: `${message}`,
     attachments: [
       {
         filename: "invoice.pdf",
