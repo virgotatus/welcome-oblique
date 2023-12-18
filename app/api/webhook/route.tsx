@@ -2,7 +2,6 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import sendEmail from "@/app/send-email/sendEmail";
-import "@/app/gpt/openaiChat";
 import openaiChat from "@/app/gpt/openaiChat";
 
 export async function POST(request: NextRequest) {
@@ -19,6 +18,6 @@ export async function POST(request: NextRequest) {
     email: email,
     message: question + "\n" + "回答是:" + result + "\n",
   });
-  console.log("Message sent: %s", info.messageId);
+  console.log("Message sent: %s", info);
   return NextResponse.json({ status: { status } });
 }
