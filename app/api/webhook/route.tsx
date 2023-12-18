@@ -2,7 +2,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import sendEmail from "@/app/send-email/sendEmail";
-import openaiChat from "@/app/gpt/openaiChat";
+import Chat from "@/app/gpt/openaiChat";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
   const username = fields[0].value;
   const question = fields[1].value;
   const email = fields[2].value;
-  const { result, status } = await openaiChat(question);
+  const { result, status } = await Chat(question);
   console.log(username, question, result);
   const info = await sendEmail({
     name: username,

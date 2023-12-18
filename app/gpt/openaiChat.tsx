@@ -4,7 +4,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!,
 });
 
-export default async function (question: string) {
+export default async function Chat(question: string) {
   let result = "";
   let status = 200;
 

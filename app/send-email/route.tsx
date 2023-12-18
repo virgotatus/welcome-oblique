@@ -7,6 +7,6 @@ export async function POST(request: NextRequest) {
     email: "435491723@qq.com",
     message: "hihi",
   });
-  console.log("Message sent: %s", info.messageId);
+  console.log("Message sent: %s", info);
   return NextResponse.json({ message: "email sented" });
 }
