@@ -37,7 +37,7 @@ export default async function Chat({
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: genPrompt,
-      temperature: 0.7,
+      temperature: 0.6,
       max_tokens: 512,
     });
     result = completion.choices[0].message.content!;
@@ -62,7 +62,7 @@ function generatePrompt(
     {
       role: "system",
       content:
-        "You are a creator for philosophy and art, like Brian Eno. According to user's context, create a haiku, then explain it longer in a homour style.",
+        "你是一个艺术和哲学的创作者，类似Brian Eno这样的人. 根据用户上下文，创作一首haiku, 然后做出长一些的解释，用幽默的风格。",
     },
     {
       role: "user",

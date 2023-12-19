@@ -22,7 +22,7 @@ export interface AIResult {
 
 function parseTally(requestBody: any): TallyForm {
   const formName = requestBody.data.formName;
-  const createTime = moment(new Date(requestBody.data.createdAt)).format(
+  const createTime = moment(new Date(requestBody.createdAt)).format(
     "YYYY-MM-DD HH:mm:ss"
   );
   const fields = requestBody.data.fields;
