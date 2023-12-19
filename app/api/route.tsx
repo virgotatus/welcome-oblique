@@ -67,6 +67,9 @@ async function processTally(tally: TallyForm) {
   });
   const AIres: AIResult = { query: tally, answer: result, oblique: oblique };
   console.log(tally.question, result);
+  if (status !== 200) {
+    console.error(result + "chat completion error!");
+  }
   const info = await sendEmail(AIres);
   console.log("Email sent: %s", info);
 }
