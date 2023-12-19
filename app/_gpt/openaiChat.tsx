@@ -33,7 +33,6 @@ export default async function Chat({
 
   try {
     const genPrompt = generatePrompt(question, obj, place, oblique);
-    console.log(genPrompt);
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: genPrompt,

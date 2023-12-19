@@ -36,6 +36,7 @@ export interface AIResult {
 }
 
 function parseTally(requestBody: any): TallyForm {
+  const eventId = requestBody.eventId;
   const formName = requestBody.data.formName;
   const createTime = moment(new Date(requestBody.createdAt)).format(
     "YYYY-MM-DD HH:mm:ss"
@@ -47,7 +48,7 @@ function parseTally(requestBody: any): TallyForm {
   const place_idx = getIndex(fields[3].value[0], PlaceID);
   const place = Places[place_idx]; // fiels[3]? 0~1
   const obj = fields[4 + place_idx].value;
-  console.log(username, email, question, place, obj);
+  console.log(eventId, createTime, username, email, question, place, obj);
   return {
     username: username,
     question: question,
@@ -69,6 +70,6 @@ export async function POST(request: NextRequest) {
   const AIres: AIResult = { query: tally, answer: result, oblique: oblique };
   console.log(tally.question, result);
   const info = await sendEmail(AIres);
-  console.log("Message sent: %s", info);
+  console.log("Email sent: %s", info);
   return NextResponse.json({ status: { status } });
 }
