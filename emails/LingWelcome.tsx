@@ -38,7 +38,7 @@ export const LingWelcomeEmail = (result: AIResult) => {
             <Text
               style={paragraph}
               dangerouslySetInnerHTML={{
-                __html: result.answer.replace("\n", "<br/>"),
+                __html: result.answer.replaceAll("\n", "<br/>"),
               }}
             ></Text>
             <Button style={button} href="http://asky.ideaplayer.shop">
