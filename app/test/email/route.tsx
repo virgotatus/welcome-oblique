@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { RESEND_INS } from "@/app/send-email/sendEmail";
-import TestTemplate from "@/emails/TestTemplate";
+import StripeWelcomeEmail from "@/emails/TestTemplate";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -28,9 +28,9 @@ export async function POST(request: NextRequest) {
         value: "ling_school",
       },
     ],
-    react: <TestTemplate text={`"啦啦啦 " ${question} "答案" ${answer}`} />,
+    react: <StripeWelcomeEmail />,
   });
 
-  console.log("Message sent: %s", result);
+  console.log("Message sent: %s", result.data && result.error);
   return NextResponse.json({ message: "email sented" });
 }

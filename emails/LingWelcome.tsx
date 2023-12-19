@@ -35,12 +35,7 @@ export const LingWelcomeEmail = (result: AIResult) => {
               以下是灵感炼丹炉根据你的问题给出的灵丹和丹文：<br></br> 灵感：
               {result.oblique} <br></br> 丹文：{result.answer}
             </Text>
-            <Button
-              px={10}
-              py={10}
-              style={button}
-              href="http://asky.ideaplayer.shop"
-            >
+            <Button style={button} href="http://asky.ideaplayer.shop">
               想再试试，点击我
             </Button>
             <Hr style={hr} />
@@ -88,6 +83,7 @@ const paragraph = {
 
 const button = {
   backgroundColor: "#656ee8",
+  padding: "10px 10px",
   borderRadius: "10px",
   color: "#fff",
   fontSize: "16px",
