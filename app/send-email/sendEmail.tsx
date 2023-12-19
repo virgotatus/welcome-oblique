@@ -1,18 +1,15 @@
 import { Resend } from "resend";
+import { AIResult } from "../api/route";
+import LingWelcomeEmail from "@/emails/LingWelcome";
 
 export const RESEND_INS = new Resend(process.env.RESEND_API_KEY);
-interface EmailProps {
-  name: string;
-  email: string;
-  message: string;
-}
 
-async function sendEmail({ name, email, message }: EmailProps) {
-  const result = await RESEND_INS.emails.send({
+async function sendEmail(res: AIResult) {
+  const sended = await RESEND_INS.emails.send({
     from: "Elon <email@ideaplayer.shop>",
-    to: [`${name} <${email}>`],
-    subject: "Welcome to Ling.School",
-    text: `${message}`,
+    to: `${name} <${res.query.email}>`,
+    subject: "灵买小镇入会登记",
+    react: LingWelcomeEmail(res),
     // attachments: [
     //   {
     //     filename: "invoice.pdf",
@@ -33,7 +30,7 @@ async function sendEmail({ name, email, message }: EmailProps) {
       },
     ],
   });
-  return result.data;
+  return sended.data;
 }
 
 export default sendEmail;
