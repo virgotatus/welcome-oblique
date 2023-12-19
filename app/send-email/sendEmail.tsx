@@ -7,7 +7,7 @@ export const RESEND_INS = new Resend(process.env.RESEND_API_KEY);
 async function sendEmail(res: AIResult) {
   const sended = await RESEND_INS.emails.send({
     from: "Elon <email@ideaplayer.shop>",
-    to: `${name} <${res.query.email}>`,
+    to: `${res.query.username} <${res.query.email}>`,
     subject: "灵买小镇入会登记",
     react: LingWelcomeEmail(res),
     // attachments: [

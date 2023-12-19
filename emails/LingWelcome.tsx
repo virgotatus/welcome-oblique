@@ -92,7 +92,8 @@ const button = {
   textAlign: "center" as const,
   display: "block",
   width: "100px",
-  height: "100px",
+  margin: "auto",
+  height: "auto",
 };
 
 const footer = {
