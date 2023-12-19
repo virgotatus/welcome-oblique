@@ -33,8 +33,14 @@ export const LingWelcomeEmail = (result: AIResult) => {
             <Hr style={hr} />
             <Text style={paragraph}>
               以下是灵感炼丹炉根据你的问题给出的灵丹和丹文：<br></br> 灵感：
-              {result.oblique} <br></br> 丹文：{`${result.answer}`}
+              {result.oblique} <br></br> 丹文：
             </Text>
+            <Text
+              style={paragraph}
+              dangerouslySetInnerHTML={{
+                __html: result.answer.replace("\n", "<br/>"),
+              }}
+            ></Text>
             <Button style={button} href="http://asky.ideaplayer.shop">
               想再试试？
             </Button>
@@ -75,7 +81,7 @@ const hr = {
 
 const paragraph = {
   color: "#525f7f",
-
+  whiteSpace: "pre-line",
   fontSize: "16px",
   lineHeight: "24px",
   textAlign: "left" as const,
