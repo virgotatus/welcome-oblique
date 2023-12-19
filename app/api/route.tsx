@@ -59,9 +59,7 @@ function parseTally(requestBody: any): TallyForm {
   };
 }
 
-export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const tally = parseTally(body);
+async function processTally(tally: TallyForm) {
   const { result, status, oblique } = await Chat({
     question: tally.question,
     obj: tally.obj,
@@ -71,5 +69,13 @@ export async function POST(request: NextRequest) {
   console.log(tally.question, result);
   const info = await sendEmail(AIres);
   console.log("Email sent: %s", info);
-  return NextResponse.json({ status: { status } });
+}
+
+export async function POST(request: NextRequest) {
+  const body = await request.json();
+  const tally = parseTally(body);
+  const job = processTally(tally).then(() => {
+    console.log("finish processing Tally!");
+  });
+  return NextResponse.json({ status: 200 });
 }
