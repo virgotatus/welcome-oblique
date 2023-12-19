@@ -33,7 +33,7 @@ export const LingWelcomeEmail = (result: AIResult) => {
             <Hr style={hr} />
             <Text style={paragraph}>
               以下是灵感炼丹炉根据你的问题给出的灵丹和丹文：<br></br> 灵感：
-              {result.oblique} <br></br> 丹文：{result.answer}
+              {result.oblique} <br></br> 丹文：{`${result.answer}`}
             </Text>
             <Button style={button} href="http://asky.ideaplayer.shop">
               想再试试，点击我
