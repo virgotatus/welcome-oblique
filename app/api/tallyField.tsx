@@ -40,7 +40,6 @@ function getTallyField(fields: TallyField[]) {
   const email = fields.find((field) => field.key === TALLY_KEY.email)!.value;
   const placeIdx = fields.findIndex((field) => field.key === TALLY_KEY.place)!;
   const { placeid, place } = getPlace(fields[placeIdx]); // fiels[3]? 0~1
-  console.log(placeid, placeIdx, fields[placeIdx + placeid]);
   const obj = fields[placeIdx + placeid + 1].value;
   return { username, question, email, place, obj };
 }
