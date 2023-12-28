@@ -23,7 +23,7 @@ function parseTally(requestBody: any): TallyForm {
   const eventId = requestBody.eventId;
   const formName = requestBody.data.formName;
   const createTime = moment(new Date(requestBody.createdAt)).format(
-    "YYYY-MM-DD HH:mm:ss"
+    "YYYY年MM月DD日 HH:mm"
   );
   const fields = requestBody.data.fields;
   const { username, question, email, place, obj } = getTallyField(fields);

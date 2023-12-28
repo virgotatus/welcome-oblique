@@ -19,21 +19,24 @@ export const LingWelcomeEmail = (result: AIResult) => {
   return (
     <Html>
       <Head />
-      <Preview>欢迎来到灵买小镇, 这是你的入会登记</Preview>
-      <Heading as="h1">欢迎来到灵买小镇, 这是你的入会登记</Heading>
+      {/* <Heading as="h1">欢迎来到灵买小镇, 这是你的入会登记</Heading> */}
       <Body style={main}>
         <Container style={container}>
           <Section style={box}>
             <Text style={paragraph}>Hi {result.query.username},</Text>
             <Text style={paragraph}>
-              在 {result.query.createtime}，你搬进了
+              在 {result.query.createtime}，你搬进了灵感买家俱乐部的
               {result.query.place}，带着这样一个问题： {result.query.question}
             </Text>
 
             <Hr style={hr} />
             <Text style={paragraph}>
-              以下是灵感炼丹炉根据你的问题给出的灵丹和丹文：<br></br> 灵感：
-              {result.oblique} <br></br> 丹文：
+              以下是灵感炼丹炉给出的一些提示，希望能带来一些帮助。
+              <br />
+              <br />
+              灵感：{result.oblique} <br />
+              <br />
+              丹文：
             </Text>
             <Text
               style={paragraph}
@@ -46,7 +49,7 @@ export const LingWelcomeEmail = (result: AIResult) => {
             </Button>
             <Hr style={hr} />
             <Text style={footer}>
-              感谢@脑八的脑洞题，@鲍勃的新年愿望，@Elon的灵感炼丹炉，@你的参与和宇宙的运转。
+              感谢@脑八的脑洞题，@鲍勃的新年愿望，@Elon的灵感炼丹炉，@你的参与和宇宙的运转。ps:邮箱不支持回复邮件。
             </Text>
           </Section>
         </Container>
