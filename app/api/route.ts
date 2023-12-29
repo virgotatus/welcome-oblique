@@ -65,3 +65,7 @@ export async function POST(request: NextRequest) {
   });
   return NextResponse.json({ status: 200 });
 }
+
+export function GET(request: NextRequest) {
+  return NextResponse.json({ hello: "hello" });
+}
