@@ -41,12 +41,15 @@ function parseTally(requestBody: any): TallyForm {
 }
 
 async function processTally(tally: TallyForm) {
-  const { result, status, oblique } = await Chat({
-    question: tally.question,
-    obj: tally.obj,
-    place: tally.place,
-  });
+  // const { result, status, oblique } = await Chat({
+  //   question: tally.question,
+  //   obj: tally.obj,
+  //   place: tally.place,
+  // });
   // save to db
+  const result = "asd";
+  const status = 200;
+  const oblique = "asdad";
   const post = await prisma.post.create({
     data: {
       email: tally.email, username: tally.username, question: tally.question, place: tally.place, obj: tally.obj, content: result
