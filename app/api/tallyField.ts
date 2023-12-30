@@ -17,7 +17,7 @@ interface TallyField {
   options?: optionType[];
 }
 
-const Places = ["猛虎镇", "赛鸽镇", "兔子洞"];
+export const Places = ["猛虎镇", "赛鸽镇", "兔子洞"];
 
 function getPlace(unit: TallyField): { placeid: number; place: string } {
   const value = unit["value"][0];

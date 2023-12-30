@@ -3,6 +3,7 @@ import sendEmail from "@/app/send-email/sendEmail";
 import Chat from "@/app/_gpt/openaiChat";
 import moment from "moment";
 import getTallyField from "./tallyField";
+import prisma from "@/prisma/client";
 
 interface TallyForm {
   username: string;
@@ -14,6 +15,7 @@ interface TallyForm {
 }
 
 export interface AIResult {
+  id : number;
   query: TallyForm;
   answer: string;
   oblique: string;
@@ -44,7 +46,13 @@ async function processTally(tally: TallyForm) {
     obj: tally.obj,
     place: tally.place,
   });
-  const AIres: AIResult = { query: tally, answer: result, oblique: oblique };
+  // save to db
+  const post = await prisma.post.create({
+    data: {
+      email: tally.email, username: tally.username, question: tally.question, place: tally.place, obj: tally.obj, content: result
+    },
+  })
+  const AIres: AIResult = { id: post.id, query: tally, answer: result, oblique: oblique };
   console.log(tally.question, result);
   if (status !== 200) {
     // catch error
