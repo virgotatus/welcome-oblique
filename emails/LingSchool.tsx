@@ -16,6 +16,7 @@ import {
 
 import { AIResult } from "@/app/api/route";
 import { Places } from "@/app/api/tallyField";
+import LingWelcomeEmail from "./LingWelcome";
 
 const Seat = ["TGT", "PGT", "RBH"];
 
@@ -67,6 +68,10 @@ export const LingSchoolEmail = (result: AIResult) => {
     Seat[Places.findIndex((place) => place === result.query.place)];
   const resultArray = result.answer.split("\n\n");
   const filteredResultArray = resultArray.filter((item) => item.length > 0);
+  if (filteredResultArray.length < 2) {
+    console.warn("filteredResultArray.length < 2");
+    return LingWelcomeEmail(result);
+  }
   return (
     <Html>
       <Head />
