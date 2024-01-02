@@ -6,9 +6,6 @@ import {
   Head,
   Hr,
   Html,
-  Img,
-  Link,
-  Preview,
   Section,
   Text,
 } from "@react-email/components";
@@ -49,7 +46,7 @@ export const LingWelcomeEmail = (result: AIResult) => {
             </Button>
             <Hr style={hr} />
             <Text style={footer}>
-              感谢@脑八的脑洞题，@鲍勃的新年愿望，@Elon的灵感炼丹炉，@你的参与和宇宙的运转。ps:支持回复邮件。
+              感谢@脑八的脑洞题，@鲍勃的新年愿望，@Elon的灵感炼丹炉，@夜游船的甲板，@你的参与和宇宙的运转。ps:支持回复邮件。
             </Text>
           </Section>
         </Container>

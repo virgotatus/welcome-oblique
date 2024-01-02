@@ -13,6 +13,7 @@
 /.next/
 /out/
 /log
+/public/share_image/*.jpg
 
 # production
 /build

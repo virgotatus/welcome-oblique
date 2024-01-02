@@ -1,24 +1,15 @@
 import {
   Body,
-  Heading,
   Button,
   Container,
   Head,
   Hr,
   Html,
   Img,
-  Link,
-  Preview,
   Section,
   Text,
   Tailwind,
 } from "@react-email/components";
-
-import { AIResult } from "@/app/api/route";
-import { Places } from "@/app/api/tallyField";
-import LingWelcomeEmail from "./LingWelcome";
-
-const Seat = ["TGT", "PGT", "RBH"];
 
 interface SideCardProps {
   place: string;
@@ -62,56 +53,18 @@ const SideCard = ({
   );
 };
 
-export const LingSchoolEmail = (result: AIResult) => {
-  const seatNumber = String(result.id).padStart(3, "0"); // '0001'
-  const placeTag =
-    Seat[Places.findIndex((place) => place === result.query.place)];
-  const resultArray = result.answer.split("\n\n");
-  const filteredResultArray = resultArray.filter((item) => item.length > 0);
-  if (filteredResultArray.length < 2) {
-    console.warn("filteredResultArray.length < 2");
-    return LingWelcomeEmail(result);
-  }
+export const LingSchoolEmail = (front_img64: string, back_img64: string) => {
   return (
     <Html>
       <Head />
       <Body style={main}>
         <Container style={container}>
           <Section style={box}>
-            <SideCard
-              place={result.query.place}
-              username={result.query.username}
-              createtime={result.query.createtime}
-              seat={placeTag + " " + seatNumber}
-            >
-              <p className="top-[299px] left-[50px] text-start absolute w-[340px] font-normal text-lg">
-                灵感
-                <br />
-                {result.oblique}
-              </p>
-              <p className="top-[379px] left-[50px] text-start absolute w-[340px] font-normal text-lg">
-                丹文
-                <br />
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: filteredResultArray[0].replaceAll("\n", "<br/>"),
-                  }}
-                />
-              </p>
-            </SideCard>
-            <SideCard
-              place={result.query.place}
-              username={result.query.username}
-              createtime={result.query.createtime}
-              seat={placeTag + " " + seatNumber}
-            >
-              <p
-                className="top-[299px] left-[50px] text-start absolute w-[340px] font-normal text-md leading-snug whitespace-pre-line"
-                dangerouslySetInnerHTML={{
-                  __html: filteredResultArray[1].replaceAll("\n", "<br/>"),
-                }}
-              />
-            </SideCard>
+            <Img
+              src={`data:image/jpg;base64,${front_img64}`}
+              alt="front card"
+            />
+            <Img src={`data:image/jpg;base64,${back_img64}`} alt="back card" />
             <Tailwind>
               <div className="mt-4 flex justify-center">
                 <Button
