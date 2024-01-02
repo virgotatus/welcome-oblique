@@ -16,11 +16,7 @@ const Page = async () => {
     explaination: `解释:
 在这个问题中，我们谈论到边界感和真实之间的关系。"一见如故的灵魂朋友"象征着那些我们在赛鸽镇 (一个虚构的地方) 遇到的人，他们与我们有着深刻的共鸣和连接。这种连接使得边界感和真实之间的分隔变得模糊。因此通过将完美的事物变得更加人性化，我们可以建立起与真实世界的更紧密联系，打破边界感的束缚。这种连接的存在使我们能够更深入地感知和理解真实的本质。`,
   };
-  const { front_img64, back_img64 } = await fetchTickets(
-    aires,
-    "public/share_image/front.jpg",
-    "public/share_image/back.jpg"
-  );
+  const { front_img64, back_img64 } = await fetchTickets(aires);
   return (
     <>
       <Image

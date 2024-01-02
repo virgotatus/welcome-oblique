@@ -58,10 +58,9 @@ async function processTally(tally: TallyForm) {
     // catch error
     console.error(result + " chat completion error!");
     AIres.query.email = "gong435491723@gmail.com";
-    await sendEmail(AIres);
   }
-  const info = await sendEmail(AIres);
-  console.log("Email sent: %s", info);
+  const sended = await sendEmail(AIres);
+  console.log("Email sent: %s", sended);
 }
 
 export async function POST(request: NextRequest) {
