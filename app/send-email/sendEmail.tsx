@@ -73,12 +73,12 @@ async function sendEmail(res: AIResult) {
       reply_to: "gong435491723@gmail.com",
       attachments: [
         {
-          filename: `${filefront}`,
-          content: "image/jpg",
+          path: `${filefront}`,
+          filename: "ticket_frontside.jpg",
         },
         {
-          filename: `${fileback}`,
-          content: "image/jpg",
+          path: `${fileback}`,
+          filename: "ticket_backside.jpg",
         },
       ],
       headers: {
