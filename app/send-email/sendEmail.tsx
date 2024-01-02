@@ -5,22 +5,8 @@ import LingSchoolEmail from "@/emails/LingSchool";
 import { fetchTickets } from "../imgrender/fetchTickets";
 import { PayloadProps } from "../imgrender/payload";
 import { resultSplit } from "./dataFormat";
-import fs from "fs";
 
 export const RESEND_INS = new Resend(process.env.RESEND_API_KEY);
-
-function deleteFile(path: string) {
-  if (fs.existsSync(path)) {
-    // Delete the file
-    fs.unlink(path, (err) => {
-      if (err) {
-        console.error("Error deleting the file", err);
-      } else {
-        console.log("File deleted successfully");
-      }
-    });
-  }
-}
 
 async function sendEmail(res: AIResult) {
   const { state, danwen, explaination } = resultSplit(res.answer);
@@ -46,7 +32,7 @@ async function sendEmail(res: AIResult) {
         },
       ],
     });
-    return sended.data;
+    return sended;
   } else {
     const aires: PayloadProps = {
       id: res.id,
@@ -57,13 +43,7 @@ async function sendEmail(res: AIResult) {
       oblique: res.oblique,
       explaination: explaination,
     };
-    const filefront = `public/share_image/front_${res.id}.jpg`;
-    const fileback = `public/share_image/back_${res.id}.jpg`;
-    const { front_img64, back_img64 } = await fetchTickets(
-      aires,
-      filefront,
-      fileback
-    );
+    const { front_img64, back_img64 } = await fetchTickets(aires);
     const sended = await RESEND_INS.emails.send({
       from: "Elon@灵感炼丹炉 <email@ideaplayer.shop>",
       to: `${res.query.username} <${res.query.email}>`,
@@ -73,12 +53,12 @@ async function sendEmail(res: AIResult) {
       reply_to: "gong435491723@gmail.com",
       attachments: [
         {
-          path: `${filefront}`,
           filename: "ticket_frontside.jpg",
+          content: front_img64,
         },
         {
-          path: `${fileback}`,
           filename: "ticket_backside.jpg",
+          content: back_img64,
         },
       ],
       headers: {
@@ -95,9 +75,7 @@ async function sendEmail(res: AIResult) {
         },
       ],
     });
-    deleteFile(filefront);
-    deleteFile(fileback);
-    return sended.data;
+    return sended;
   }
 }
 
