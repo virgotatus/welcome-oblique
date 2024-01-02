@@ -1,3 +1,5 @@
+import { Places } from "./constant";
+
 const TALLY_KEY = {
   email: "question_dWM1Ry",
   username: "question_BzylgY",
@@ -17,7 +19,6 @@ interface TallyField {
   options?: optionType[];
 }
 
-export const Places = ["猛虎镇", "赛鸽镇", "兔子洞"];
 
 function getPlace(unit: TallyField): { placeid: number; place: string } {
   const value = unit["value"][0];
