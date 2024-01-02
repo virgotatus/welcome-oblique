@@ -60,6 +60,7 @@ export const LingSchoolEmail = (front_img64: string, back_img64: string) => {
       <Body style={main}>
         <Container style={container}>
           <Section style={box}>
+            <Text style={paragraph}>这是你的入会灵感彩蛋，请查收。</Text>
             <Img
               src={`data:image/jpg;base64,${front_img64}`}
               alt="front card"
@@ -109,6 +110,14 @@ const box = {
 const hr = {
   borderColor: "#e6ebf1",
   margin: "20px 0",
+};
+
+const paragraph = {
+  color: "#525f7f",
+  whiteSpace: "pre-line",
+  fontSize: "16px",
+  lineHeight: "24px",
+  textAlign: "left" as const,
 };
 
 const footer = {
