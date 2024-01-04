@@ -1,9 +1,10 @@
 import {payloadBack, payloadFront, PayloadProps} from "./payload";
 import axios from 'axios';
 
-export async function fetchImage(url: string) {
-  const response = await axios.get(url, { responseType: 'arraybuffer'});
+export type {PayloadProps};
 
+async function fetchImage(url: string) {
+  const response = await axios.get(url, { responseType: 'arraybuffer'});
   return response.data.toString('base64');
 }
 
@@ -29,8 +30,11 @@ async function imgrender(data: any) {
 
 export async function fetchTickets(aires: PayloadProps) {
   const front = payloadFront(aires);
-  const back = payloadBack(aires);
   const {url: front_url,  img64:front_img64} = await imgrender(front);
-  const {url: back_url,  img64:back_img64} = await imgrender(back);
-  return {front_img64: front_img64, back_img64: back_img64};
+  if (!aires.oneside) {
+    const back = payloadBack(aires);
+    const {url: back_url,  img64:back_img64} = await imgrender(back);
+    return {front_img64: front_img64, back_img64: back_img64};
+  }
+  return {front_img64: front_img64, back_img64: ""};
 }
