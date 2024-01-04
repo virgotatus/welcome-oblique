@@ -21,18 +21,14 @@ async function sendEmail(res: AIResult) {
   };
   const { front_img64, back_img64 } = await fetchTickets(aires);
   const attachment = [
-    front_img64 === ""
-      ? {}
-      : {
-          filename: "ticket_frontside.jpg",
-          content: front_img64,
-        },
-    back_img64 === ""
-      ? {}
-      : {
-          filename: "ticket_backside.jpg",
-          content: back_img64,
-        },
+    front_img64 !== "" && {
+      filename: "ticket_frontside.jpg",
+      content: front_img64,
+    },
+    back_img64 !== "" && {
+      filename: "ticket_backside.jpg",
+      content: back_img64,
+    },
   ];
   const sended = await RESEND_INS.emails.send({
     from: "Elon@灵感炼丹炉 <email@ideaplayer.shop>",
