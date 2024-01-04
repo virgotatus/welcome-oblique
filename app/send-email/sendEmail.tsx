@@ -21,11 +21,13 @@ async function sendEmail(res: AIResult) {
   };
   const { front_img64, back_img64 } = await fetchTickets(aires);
   const attachment = [
-    {
-      filename: "ticket_frontside.jpg",
-      content: front_img64,
-    },
-    state === -1
+    front_img64 === ""
+      ? {}
+      : {
+          filename: "ticket_frontside.jpg",
+          content: front_img64,
+        },
+    back_img64 === ""
       ? {}
       : {
           filename: "ticket_backside.jpg",
