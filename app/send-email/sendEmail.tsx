@@ -20,15 +20,13 @@ async function sendEmail(res: AIResult) {
     oneside: state === -1,
   };
   const { front_img64, back_img64 } = await fetchTickets(aires);
-  const attachment = [
-    front_img64 !== "" && {
-      filename: "ticket_frontside.jpg",
-      content: front_img64,
-    },
-    back_img64 !== "" && {
-      filename: "ticket_backside.jpg",
-      content: back_img64,
-    },
+  const attachments = [
+    ...(front_img64 !== ""
+      ? [{ filename: "ticket_frontside.jpg", content: front_img64 }]
+      : []),
+    ...(back_img64 !== ""
+      ? [{ filename: "ticket_backside.jpg", content: back_img64 }]
+      : []),
   ];
   const sended = await RESEND_INS.emails.send({
     from: "Elon@灵感炼丹炉 <email@ideaplayer.shop>",
@@ -37,7 +35,7 @@ async function sendEmail(res: AIResult) {
     subject: "一份灵感彩蛋",
     react: LingWelcomeEmail(res),
     reply_to: "gong435491723@gmail.com",
-    attachments: attachment,
+    attachments: attachments,
     headers: {
       "X-Entity-Ref-ID": "123456789",
     },
