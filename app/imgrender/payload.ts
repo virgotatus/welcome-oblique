@@ -26,7 +26,7 @@ const payloadFront = ({createtime, id, place, username, oblique, danwen, oneside
           {"text": `${ticketDate}`, "x": PAD+400, "y": PAD+340, "width": 200, "fontSize": 32, "lineHeight": 40, "font": "Alibaba-PuHuiTi-Medium", "zIndex": 2},
           {"text": `${ticketSeat}`, "x": PAD+670, "y": PAD+340, "width": 200, "fontSize": 32, "lineHeight": 40, "font": "Alibaba-PuHuiTi-Medium", "zIndex": 2},
           {"text": `灵感`, "x": PAD+100, "y": PAD+500, "width": 540, "fontSize": 24, "lineHeight": 24, "font":"Alibaba-PuHuiTi-Regular", "zIndex": 2},
-          {"text": `${oblique}`, "x": PAD+100, "y": PAD+530, "width": 530, "fontSize": 32, "lineHeight": 40, "font":"Alibaba-PuHuiTi-Bold", "zIndex": 2},
+          {"text": `${oblique}`, "x": PAD+100, "y": PAD+530, "width": 530, "fontSize": (oneside? 24:32), "lineHeight": (oneside? 28:40), "font":"Alibaba-PuHuiTi-Bold", "zIndex": 2},
           {"text": `丹文`, "x": PAD+100, "y": PAD+(oneside? 565:630), "width": 540, "fontSize": 24, "lineHeight": 24, "font":"Alibaba-PuHuiTi-Regular", "zIndex": 2},
           {"text": `${danwen}`,
               "x": PAD+100, "y": PAD+(oneside? 595:660), "width": 530, "fontSize": (oneside? 24:32), "lineHeight": (oneside? 28:40), "font": "Alibaba-PuHuiTi-Bold", "zIndex": 2}

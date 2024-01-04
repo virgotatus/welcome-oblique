@@ -60,7 +60,7 @@ async function processTally(tally: TallyForm) {
     AIres.query.email = "gong435491723@gmail.com";
   }
   const sended = await sendEmail(AIres);
-  console.log("Email sent: %s", sended);
+  console.log("Email sent: %s", sended.data && sended.error);
 }
 
 export async function POST(request: NextRequest) {

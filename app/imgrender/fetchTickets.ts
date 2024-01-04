@@ -4,8 +4,18 @@ import axios from 'axios';
 export type {PayloadProps};
 
 async function fetchImage(url: string) {
-  const response = await axios.get(url, { responseType: 'arraybuffer'});
-  return response.data.toString('base64');
+  try {
+    const response = await fetch(url, {cache: "no-cache"});
+    // Retrieve the ArrayBuffer from the response
+    const arrayBuffer = await response.arrayBuffer();
+    const base64String = Buffer.from(arrayBuffer).toString('base64');
+    return base64String;
+    // const response = await axios.get(url, { responseType: 'arraybuffer'});
+    // return response.data.toString('base64');
+  } catch (error) {
+    console.error(error);
+    return "";
+  }
 }
 
 async function imgrender(data: any) {
