@@ -41,6 +41,8 @@ export const LingWelcomeEmail = (result: AIResult) => {
                 __html: result.answer.replaceAll("\n", "<br/>"),
               }}
             ></Text>
+            <br />
+            <Text style={paragraph}>附件有你的专属机票，请查收和分享～</Text>
             <Button style={button} href="http://asky.ideaplayer.shop">
               想再试试？
             </Button>
