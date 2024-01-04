@@ -1,5 +1,4 @@
 import {payloadBack, payloadFront, PayloadProps} from "./payload";
-import axios from 'axios';
 
 export type {PayloadProps};
 
