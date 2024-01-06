@@ -43,8 +43,8 @@ export default async function Chat({
     status = 200;
   } catch (error) {
     if (error instanceof OpenAI.APIError) {
-      result = "炼丹炉核心没钱或爆炸了 \n\n 请联系鲍勃或elon尽快维修。";
-      console.error("openai api error!", result);
+      // result = "炼丹炉核心没钱或爆炸了 \n\n 请联系鲍勃或elon尽快维修。";
+      console.error("openai api error!", error);
       status = error.status!;
     }
   }
