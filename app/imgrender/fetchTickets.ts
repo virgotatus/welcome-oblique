@@ -1,11 +1,12 @@
 import {payloadBack, payloadFront, PayloadProps} from "./payload";
-import axios from "axios";
 export type {PayloadProps};
 
 async function fetchImage(url: string) {
   try {
-    const response = await axios.get(url, { responseType: 'arraybuffer'});
-    return response.data.toString('base64');
+    const response = await fetch(url, {cache: "no-cache"});
+    const arrayBuffer = await response.arrayBuffer();
+    const base64String = Buffer.from(arrayBuffer).toString('base64');
+    return base64String;
   } catch (error) {
     console.error(error);
     return "";

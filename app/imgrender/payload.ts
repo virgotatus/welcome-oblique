@@ -11,7 +11,7 @@ export interface PayloadProps {
   oneside?: boolean;
 }
 
-const BG_URL = "https://q24.io/wp-content/uploads/2024/01/ticket-ling-school0103.png";
+const BG_URL = "https://s11.ax1x.com/2024/01/27/pFngose.png";
 const PAD = 30;
 
 const payloadFront = ({createtime, id, place, username, oblique, danwen, oneside}: PayloadProps) => {
