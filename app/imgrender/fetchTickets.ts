@@ -14,10 +14,10 @@ async function fetchImage(url: string) {
 }
 
 async function imgrender(data: any) {
-  const response = await fetch("https://api.imgrender.cn/open/v1/pics", {
+  const response = await fetch("https://api.imgrender.net/open/v1/pics", {
     method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
       "X-API-Key": process.env['IMG_GEN_API']!,
     },
     body: JSON.stringify(data),
