@@ -47,6 +47,7 @@ async function processTally(tally: TallyForm) {
     place: tally.place,
   });
   // save to db
+  console.log(`Database_url: ${process.env.DATABASE_URL}`);
   const post = await prisma.post.create({
     data: {
       email: tally.email, username: tally.username, question: tally.question, place: tally.place, obj: tally.obj, content: result

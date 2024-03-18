@@ -70,7 +70,7 @@ export const LingSchoolEmail = (front_img64: string, back_img64: string) => {
               <div className="mt-4 flex justify-center">
                 <Button
                   className="btn bg-stone-800 p-[10px] text-lg rounded-lg text-white font-bold text-center w-40 m-auto h-auto"
-                  href="http://asky.ideaplayer.shop"
+                  href="https://ling.liandanlu.xyz"
                 >
                   还想炼丹？
                 </Button>
