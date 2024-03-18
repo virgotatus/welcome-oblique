@@ -29,7 +29,7 @@ async function sendEmail(res: AIResult) {
       : []),
   ];
   const sended = await RESEND_INS.emails.send({
-    from: "Elon@灵感炼丹炉 <email@ideaplayer.shop>",
+    from: "Elon@灵感炼丹炉 <email@liandanlu.xyz>",
     to: `${res.query.username} <${res.query.email}>`,
     bcc: "bob<bob@q24.io>",
     subject: "一份灵感彩蛋",
