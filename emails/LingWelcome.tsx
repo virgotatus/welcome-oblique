@@ -43,7 +43,7 @@ export const LingWelcomeEmail = (result: AIResult) => {
             ></Text>
             <br />
             {/* <Text style={paragraph}>附件有你的专属机票，请查收和分享～</Text> */}
-            <Button style={button} href="http://asky.ideaplayer.shop">
+            <Button style={button} href="https://ling.liandanlu.xyz">
               想再试试？
             </Button>
             <Hr style={hr} />
