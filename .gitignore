@@ -12,7 +12,7 @@
 # next.js
 /.next/
 /out/
-/log
+/log/*
 /public/share_image/*.jpg
 
 # production
