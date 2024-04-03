@@ -1,0 +1,1 @@
+export { getOblique, getRandomOblique } from "./getOblique"
