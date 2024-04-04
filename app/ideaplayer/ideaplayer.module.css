@@ -1,0 +1,49 @@
+/* 
+select,
+textarea,
+.button {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 18px;
+  padding: 8px 12px;
+} */
+
+
+/* shared picture model */
+
+/* picture */
+.modalContent {
+  margin: auto;
+  display: block;
+  height: auto;
+  max-width: 700px;
+  max-height: 700px;
+  object-fit: contain;
+}
+
+/* add animation */
+.modalContent { 
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* screen scale to suit img for different platform: 100% */
+@media only screen and (max-height: 700px){
+  .modalContent {
+    height: auto;
+  }
+}
