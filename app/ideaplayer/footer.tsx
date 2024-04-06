@@ -1,7 +1,10 @@
-const IdeaFooter = () => {
-  const counts = 0;
+import prisma from "@/prisma/client";
+
+const IdeaFooter = async () => {
+  const counts =
+    (await prisma.ideaplayer.count()) + (await prisma.ling.count());
   return (
-    <footer className="footer-center gap-y-2 mt-12 mb-2 text-center text-gray-500">
+    <footer className="footer-center gap-y-2 mt-12 mb-2 text-center text-gray-700">
       <div className="">
         已给出灵感(Served Ideas):{" "}
         <span className="underline">

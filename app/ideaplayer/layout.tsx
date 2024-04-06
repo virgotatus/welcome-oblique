@@ -4,7 +4,7 @@ import IdeaHeader from "./header";
 
 const ideaplayerLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="relative bg-orange-300 flex flex-col min-h-screen">
+    <div className="relative bg-[orange] flex flex-col min-h-screen">
       <Bgm />
       <div className=" max-w-[70ch] ms-auto me-auto flex flex-col justify-center">
         <IdeaHeader />

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { generatePrompt } from "@/lib/gpt/ling/openaiChat";
+import { generatePrompt } from "@/lib/gpt/ling/lingChat";
 import { getRandomOblique } from "@/lib/oblique";
 
 export async function POST(request: NextRequest) {
