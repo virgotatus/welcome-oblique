@@ -1,8 +1,9 @@
 import sendEmail from "@/lib/send-email/ling/sendEmail";
-import Chat from "@/lib/gpt/ling/openaiChat";
+import LingChat from "@/lib/gpt/ling/lingChat";
 import moment from "moment";
 import prisma from "@/prisma/client";
 import getTallyField from "./tallyField";
+import { AIResult } from "../type";
 
 interface TallyForm {
   username: string;
@@ -13,11 +14,8 @@ interface TallyForm {
   createtime: string;
 }
 
-export interface AIResult {
-  id : number;
+export interface LingResult extends AIResult {
   query: TallyForm;
-  answer: string;
-  oblique: string;
 }
 
 
@@ -41,7 +39,7 @@ export function parseTally(requestBody: any): TallyForm {
 }
 
 export async function processTally(tally: TallyForm) {
-  const { result, status, oblique } = await Chat({
+  const { result, status, oblique } = await LingChat({
     question: tally.question,
     obj: tally.obj,
     place: tally.place,
@@ -53,7 +51,7 @@ export async function processTally(tally: TallyForm) {
       email: tally.email, username: tally.username, question: tally.question, place: tally.place, obj: tally.obj, content: result
     },
   })
-  const AIres: AIResult = { id: ling.id, query: tally, answer: result, oblique: oblique };
+  const AIres: LingResult = { id: ling.id, query: tally, answer: result, oblique: oblique };
   console.log(tally.question, result);
   if (status !== 200) {
     // catch error

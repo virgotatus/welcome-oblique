@@ -2,12 +2,12 @@ import { Resend } from "resend";
 import LingWelcomeEmail from "@/emails/LingWelcome";
 import LingSchoolEmail from "@/emails/LingSchool";
 import { fetchTickets, PayloadProps } from "@/lib/imgRender/ling/fetchTickets";
-import { AIResult } from "@/actions/ling";
+import { LingResult } from "@/actions/ling";
 import { resultSplit } from "./dataFormat";
 
 export const RESEND_INS = new Resend(process.env.RESEND_API_KEY);
 
-async function sendEmail(res: AIResult) {
+async function sendEmail(res: LingResult) {
   const { state, danwen, explaination } = resultSplit(res.answer);
   const aires: PayloadProps = {
     id: res.id,

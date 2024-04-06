@@ -1,10 +1,6 @@
 import OpenAI from "openai";
 import { getRandomOblique } from "@/lib/oblique";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!,
-  baseURL: process.env.ONE_API_URL!
-});
+import Chat, { ChatOutput } from "@/lib/gpt/chat";
 
 interface ChatProps {
   question: string;
@@ -12,44 +8,25 @@ interface ChatProps {
   place: string;
 }
 
-interface ChatOutput {
-  result: string;
-  oblique: string;
-  status: number;
+export interface LingOutput extends ChatOutput {
+  oblique: string
 }
 
-export default async function Chat({
+export default async function LingChat({
   question,
   obj,
   place,
-}: ChatProps): Promise<ChatOutput> {
-  let result = "";
-  let status = 200;
-  const oblique = getRandomOblique();
-
+}: ChatProps): Promise<LingOutput> {
+  let res : LingOutput = { result: "Please enter a valid question", oblique:"", status:400};
   if (question.trim().length === 0) {
-    result = "Please enter a valid question";
-    status = 400;
+    return res;
   }
+  
+  const oblique = getRandomOblique();
+  const genPrompt = generatePrompt(question, obj, place, oblique);
+  const chatOutput = await Chat(genPrompt);
 
-  try {
-    const genPrompt = generatePrompt(question, obj, place, oblique);
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: genPrompt,
-      temperature: 0.6,
-      max_tokens: 512,
-    });
-    result = completion.choices[0].message.content!;
-    status = 200;
-  } catch (error) {
-    if (error instanceof OpenAI.APIError) {
-      // result = "炼丹炉核心没钱或爆炸了 \n\n 请联系鲍勃或elon尽快维修。";
-      console.error("openai api error!", error);
-      status = error.status!;
-    }
-  }
-  return { result: result, status: status, oblique: oblique };
+  return { result: chatOutput.result, status: chatOutput.status, oblique: oblique };
 }
 
 function generatePrompt(

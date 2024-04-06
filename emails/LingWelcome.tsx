@@ -10,9 +10,9 @@ import {
   Text,
 } from "@react-email/components";
 
-import { AIResult } from "@/actions/ling";
+import { LingResult } from "@/actions/ling";
 
-export const LingWelcomeEmail = (result: AIResult) => {
+export const LingWelcomeEmail = (result: LingResult) => {
   return (
     <Html>
       <Head />
