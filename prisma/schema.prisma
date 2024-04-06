@@ -20,7 +20,7 @@ model Ling {
 
 model Ideaplayer {
   id         Int      @id @default(autoincrement())
-  email      String   @db.VarChar(255)
+  email      String?  @db.VarChar(255)
   locale     String   @default("zh") @db.VarChar(32)
   city       String   @db.VarChar(255)
   thing      String   @db.VarChar(255)
