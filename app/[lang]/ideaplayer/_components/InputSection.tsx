@@ -4,7 +4,19 @@ import moment from "moment";
 import { ideaSubmit } from "@/actions/ideaplayer";
 import { useFormStatus } from "react-dom";
 
-const InputSection = () => {
+interface LabelProps {
+  timeLabel: string;
+  placeLabel: string;
+  objectLabel: string;
+  locale: string;
+}
+
+const InputSection = ({
+  timeLabel,
+  placeLabel,
+  objectLabel,
+  locale,
+}: LabelProps) => {
   const { pending } = useFormStatus();
   const ideaSubmitWith = ideaSubmit.bind(null);
 
@@ -12,7 +24,13 @@ const InputSection = () => {
     <>
       <form action={ideaSubmitWith}>
         <div className="flex justify-center items-center mb-5">
-          <label>时间 &nbsp;(Time)：</label>
+          <input
+            type="locale"
+            name="locale"
+            defaultValue={locale}
+            className="hidden"
+          />
+          <label className="text-lg">{timeLabel} ：</label>
           <input
             type="gtime"
             name="gtime"
@@ -22,7 +40,7 @@ const InputSection = () => {
           />
         </div>
         <div className="flex justify-center items-center mb-5 ">
-          <label>场景(Venue)：</label>
+          <label className="text-lg">{placeLabel} ：</label>
           <input
             type="city"
             name="city"
@@ -31,7 +49,7 @@ const InputSection = () => {
           {/* {error} */}
         </div>
         <div className="flex justify-center items-center mb-5">
-          <label>东西(Object)：</label>
+          <label className="text-lg">{objectLabel} ：</label>
           <input
             type="thing"
             name="thing"
@@ -42,12 +60,12 @@ const InputSection = () => {
         <div className="flex justify-center items-center gap-4">
           <button
             type="submit"
-            className="inline-block text-lg text-white bg-black hover:border-rose-800 hover:border-4 transition duration-1000 
-          m-2 w-auto px-6 py-3"
+            className="inline-block text-2xl text-white bg-black hover:border-rose-800 hover:border-4 transition duration-1000 
+          m-2 w-auto px-12 py-5"
             id="ask-button"
             disabled={pending}
           >
-            生成 (generate)
+            生成 (Generate)
           </button>
         </div>
       </form>

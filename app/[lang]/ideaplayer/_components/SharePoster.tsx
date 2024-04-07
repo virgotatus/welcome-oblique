@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import style from "../ideaplayer.module.css";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
-const SharePoster = () => {
+const SharePoster = ({ label }: { label: string }) => {
   const [isShowed, setIsShowed] = useState(false);
 
   return (
@@ -16,7 +17,7 @@ const SharePoster = () => {
         className="btn m-auto mt-4 block "
         onClick={() => setIsShowed(true)}
       >
-        生成海报 (Generate Poster)
+        {label}
       </Button>
       {/* modal pop */}
       {isShowed && (

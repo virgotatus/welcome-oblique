@@ -4,7 +4,7 @@ import style from "../ideaplayer.module.css";
 import Image from "next/image";
 import MoneyImage from "@/public/ideaplayer/money.jpg";
 
-const PayModal = () => {
+const PayModal = ({ label }: { label: string }) => {
   return (
     <>
       <Button
@@ -20,7 +20,7 @@ const PayModal = () => {
           modal?.showModal();
         }}
       >
-        投币！(Buy me a Coffee!)
+        {label}
       </Button>
 
       <dialog
@@ -58,6 +58,7 @@ const PayModal = () => {
               href="https://paypal.me/elongong?country.x=C2&locale.x=zh_XC"
               target="_blank"
               rel="noopener noreferrer"
+              className="text-2xl underline"
             >
               Paypal
             </a>

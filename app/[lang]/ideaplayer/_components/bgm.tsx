@@ -6,7 +6,7 @@ const Bgm = () => {
   const [bgmState, setBgmOn] = useState(false);
   const audioElement = useRef<HTMLAudioElement | undefined>(
     typeof Audio !== "undefined"
-      ? new Audio("/ideaplayer/Brian-Eno-1-1-zip.mp3")
+      ? new Audio("/audio/Brian-Eno-1-1-zip.mp3")
       : undefined
   );
   const volumeTrigger = useRef<HTMLInputElement>(null);

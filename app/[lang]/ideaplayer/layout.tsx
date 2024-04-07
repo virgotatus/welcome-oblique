@@ -8,7 +8,7 @@ const ideaplayerLayout = ({ children }: { children: React.ReactNode }) => {
       <Bgm />
       <div className=" max-w-[70ch] ms-auto me-auto flex flex-col justify-center">
         <IdeaHeader />
-        <section className="flex-grow  mt-8">{children}</section>
+        <section className="flex-grow mt-8">{children}</section>
         <div className="absolute inset-x-0 bottom-0 m-auto ">
           <IdeaFooter />
         </div>
