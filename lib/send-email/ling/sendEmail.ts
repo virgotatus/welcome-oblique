@@ -1,6 +1,6 @@
 import { Resend } from "resend";
-import LingWelcomeEmail from "@/emails/LingWelcome";
-import LingSchoolEmail from "@/emails/LingSchool";
+import LingWelcomeEmail from "@/emails/ling/LingWelcome";
+import LingSchoolEmail from "@/emails/ling/LingSchool";
 import { fetchTickets, PayloadProps } from "@/lib/imgRender/ling/fetchTickets";
 import { LingResult } from "@/actions/ling";
 import { resultSplit } from "./dataFormat";

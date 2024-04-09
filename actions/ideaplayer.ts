@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import prisma from "@/prisma/client";
 import IdeaplayerChat from "@/lib/gpt/ideaplayer/ideaplayerChat";
 import { AIResult } from "@/actions/type";
+import sendEmail from "@/lib/send-email/ideaplayer/sendEmail";
 
 interface IdeaplayerForm {
   place: string;
@@ -22,13 +23,12 @@ export async function ideaSubmit(formData: FormData) {
     place: formData.get("city") as string,
     obj: formData.get("thing") as string,
     createtime: formData.get("gtime") as string,
-    locale: "zh"
+    locale: formData.get("locale") as string,
   };
   // TODO: validate datae
   if (!(rawFormData.place && rawFormData.obj && rawFormData.createtime)) {
     return "error";
   }
-  // TODO: add locale zh or en??
 
   const { result, status, oblique } = await IdeaplayerChat({
     place: rawFormData.place as string,
@@ -54,5 +54,35 @@ export async function ideaSubmit(formData: FormData) {
     // TODO: assetion!
   }
 
-  redirect(`/ideaplayer/${idea.id}`);
+  redirect(`/ideaplayer/idea/${idea.id}`);
+}
+
+
+export async function ideaEmail(id:number, formData: FormData) {
+  console.log("id:", id, formData.get("email_addr"))
+  const idea = await prisma.ideaplayer.findUnique({
+    where: {
+      id: Number(id),
+    },
+  });
+  if (idea) {
+    const result:IdeaResult = {
+       id:idea.id,
+       oblique: idea.oblique, 
+       answer: idea.answer || "",
+       query: {
+        place: idea.city, 
+        obj: idea.thing, 
+        createtime:String(idea.created_at),
+        locale: idea.locale
+      }
+    }
+    const sended = await sendEmail(formData.get("email_addr")! as string, result);
+    console.log("Email sent: %s", sended.data || sended.error);
+  }else {
+    return {
+      message: 'Sending failed',
+    }
+  }
+  
 }

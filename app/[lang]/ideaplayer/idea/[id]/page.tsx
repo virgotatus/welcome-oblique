@@ -14,6 +14,10 @@ const IdeaIdPage = async ({
     where: {
       id: Number(id),
     },
+    select: {
+      oblique: true,
+      answer: true,
+    },
   });
 
   return (

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import style from "../ideaplayer.module.css";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useTranslation } from "next-i18next";
 
 const SharePoster = ({ label }: { label: string }) => {
   const [isShowed, setIsShowed] = useState(false);
