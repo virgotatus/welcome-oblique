@@ -23,7 +23,6 @@ export const IdeaEmail = (result: IdeaResult) => {
             <Text style={paragraph}>时间：{result.query.createtime}</Text>
             <Text style={paragraph}>场景：{result.query.place}</Text>
             <Text style={paragraph}>物品：{result.query.obj}</Text>
-
             <Hr style={hr} />
             <Text style={paragraph}>
               以下是灵感炼丹炉给出的一些提示，希望能带来一些帮助。
@@ -45,6 +44,7 @@ export const IdeaEmail = (result: IdeaResult) => {
               想再试试？
             </Button>
             <Hr style={hr} />
+            谢谢, 祝你心想事成~ ps.邮件可恢复。
           </Section>
         </Container>
       </Body>
