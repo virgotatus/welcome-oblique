@@ -1,9 +1,7 @@
-import { Resend } from "resend";
 import { IdeaEmail } from "@/emails/ideaplayer/notifyEmail";
 import { IdeaResult } from "@/actions/ideaplayer";
+import { RESEND_INS } from "../client";
 
-
-export const RESEND_INS = new Resend(process.env.RESEND_API_KEY);
 
 async function sendEmail(email:string, res: IdeaResult) {
   

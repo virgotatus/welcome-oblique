@@ -1,11 +1,8 @@
-import { Resend } from "resend";
 import LingWelcomeEmail from "@/emails/ling/LingWelcome";
-import LingSchoolEmail from "@/emails/ling/LingSchool";
 import { fetchTickets, PayloadProps } from "@/lib/imgRender/ling/fetchTickets";
 import { LingResult } from "@/actions/ling";
 import { resultSplit } from "./dataFormat";
-
-export const RESEND_INS = new Resend(process.env.RESEND_API_KEY);
+import { RESEND_INS } from "../client";
 
 async function sendEmail(res: LingResult) {
   const { state, danwen, explaination } = resultSplit(res.answer);

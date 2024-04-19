@@ -7,6 +7,10 @@ interface Annotations {
   color: string;
 }
 
+export function to_classname(annotations: Annotations) {
+  return `${annotations.bold ? "font-bold":""} ${annotations.italic ? "italic": ""} ${annotations.underline ? "underline": ""} `
+}
+
 export interface RichText {
   type: "text"| "equation" | "mention" | "unknown";
   text?: {
@@ -17,7 +21,7 @@ export interface RichText {
     type: "page" | "url";
     page? : {id:string};
   }
-  annotations? : Annotations
+  annotations : Annotations
   plain_text: string;
   href: string |null;
 }
