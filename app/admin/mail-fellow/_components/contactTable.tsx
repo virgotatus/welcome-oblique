@@ -8,9 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Receiver } from "@/actions/mail-fellow";
+import { Contact } from "@/actions/mail-fellow";
 
-function ReceiverTable({ receivers }: { receivers: Receiver[] }) {
+function ContactTable({ contacts }: { contacts: Contact[] }) {
   return (
     <Table>
       <TableCaption>收件人列表</TableCaption>
@@ -21,10 +21,10 @@ function ReceiverTable({ receivers }: { receivers: Receiver[] }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {receivers.map((receiver) => (
-          <TableRow key={receiver.name}>
-            <TableCell className="font-medium">{receiver.name}</TableCell>
-            <TableCell className="text-center">{receiver.address}</TableCell>
+        {contacts.map((contact) => (
+          <TableRow key={contact.name}>
+            <TableCell className="font-medium">{contact.name}</TableCell>
+            <TableCell className="text-center">{contact.address}</TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -32,7 +32,7 @@ function ReceiverTable({ receivers }: { receivers: Receiver[] }) {
         <TableRow>
           <TableCell colSpan={1}>Total</TableCell>
           <TableCell className="text-center">
-            {receivers.length}
+            {contacts.length}
             {"位"}
           </TableCell>
         </TableRow>
@@ -41,4 +41,4 @@ function ReceiverTable({ receivers }: { receivers: Receiver[] }) {
   );
 }
 
-export default ReceiverTable;
+export default ContactTable;

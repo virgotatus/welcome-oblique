@@ -18,9 +18,9 @@ import { toast } from "@/components/ui/use-toast";
 import { sendSubmit } from "@/actions/mail-fellow";
 
 const formSchema = z.object({
-  receivers: z
+  contacts: z
     .string()
-    .min(3, { message: "receivers must be at least 3 characters." }),
+    .min(3, { message: "contacts must be at least 3 characters." }),
   notion_page: z.string().min(10).max(50),
 });
 
@@ -30,7 +30,7 @@ const SendForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      receivers: "",
+      contacts: "",
       notion_page: "",
     },
   });
@@ -55,7 +55,7 @@ const SendForm = () => {
       >
         <FormField
           control={form.control}
-          name="receivers"
+          name="contacts"
           render={({ field }) => (
             <FormItem>
               <FormLabel>收件人</FormLabel>
