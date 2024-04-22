@@ -5,6 +5,8 @@ import prisma from "@/prisma/client";
 import IdeaplayerChat from "@/lib/gpt/ideaplayer/ideaplayerChat";
 import { AIResult } from "@/actions/type";
 import sendEmail from "@/lib/send-email/ideaplayer/sendEmail";
+import imgrender from "@/lib/imgRender/client";
+import { Payload } from "@/lib/imgRender/ideaplayer/payload";
 
 interface IdeaplayerForm {
   place: string;
@@ -78,11 +80,30 @@ export async function ideaEmail(id:number, formData: FormData) {
       }
     }
     const sended = await sendEmail(formData.get("email_addr")! as string, result);
+    await prisma.ideaplayer.update({
+      where: {id: idea.id},
+      data: {
+        email: formData.get("email_addr")! as string
+      }
+    });
     console.log("Email sent: %s", sended.data || sended.error);
-  }else {
+  } else {
     return {
       message: 'Sending failed',
     }
   }
-  
+}
+
+
+export async function fetchPoster(id: string) {
+  const idea = await prisma.ideaplayer.findUnique({
+    where: {
+      id: Number(id),
+    },
+  });
+
+  const payload = Payload({createtime : idea!.created_at.toLocaleDateString() +": "+ idea!.created_at.getHours() ,
+   place: idea!.city, object: idea!.thing, oblique: idea!.oblique, answer: idea!.answer!});
+  const {url, img64} = await imgrender(payload);  
+  return {url: url, img64: img64};
 }

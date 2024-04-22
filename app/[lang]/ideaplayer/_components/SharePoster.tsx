@@ -1,20 +1,41 @@
 "use client";
-import React, { useState } from "react";
-import style from "../ideaplayer.module.css";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import style from "../ideaplayer.module.css";
+import { fetchPoster } from "@/actions/ideaplayer";
+import { useParams } from "next/navigation";
 
-const SharePoster = ({ label }: { label: string }) => {
+interface Props {
+  label: string;
+}
+
+const SharePoster = ({ label }: Props) => {
+  const placeholder = "https://via.placeholder.com/600x1000";
   const [isShowed, setIsShowed] = useState(false);
+  const [img_url, setImgUrl] = useState(placeholder);
+  const params = useParams<{ id: string }>();
+
+  const fetchImg = async () => {
+    return await fetchPoster(params.id);
+  };
 
   return (
     <>
       <Button
-        type="button"
+        type="submit"
         variant="outline"
         id="share-picture-button"
         className="btn m-auto mt-4 block "
-        onClick={() => setIsShowed(true)}
+        onClick={() => {
+          if (img_url === placeholder) {
+            fetchImg().then((res) => {
+              setImgUrl(res.url);
+              console.log("fetch img");
+            });
+          }
+          setIsShowed(true);
+        }}
       >
         {label}
       </Button>
@@ -40,8 +61,9 @@ const SharePoster = ({ label }: { label: string }) => {
           </span>
           <Image
             fill
+            loading="lazy"
             alt="poster"
-            src="https://s11.ax1x.com/2024/02/20/pFYORld.png"
+            src={img_url}
             className={style.modalContent}
             id="shared-picture"
           />

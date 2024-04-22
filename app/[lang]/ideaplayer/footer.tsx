@@ -7,7 +7,7 @@ const IdeaFooter = async () => {
     <footer className="footer-center gap-y-2 mt-12 mb-2 text-center text-gray-700">
       <div className="">
         已给出灵感(Served Ideas):{" "}
-        <span className="underline">
+        <span className="italic font-semibold">
           {"  "}
           {counts}
         </span>
