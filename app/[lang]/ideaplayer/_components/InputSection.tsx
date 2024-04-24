@@ -45,6 +45,14 @@ const InputSection = ({
             type="city"
             name="city"
             className="textarea textarea-primary px-2 py-1 "
+            onFocus={() => {
+              const volume_trigger = document.getElementById(
+                "volumeTrigger"
+              ) as HTMLInputElement;
+              if (!volume_trigger?.checked) {
+                volume_trigger.click();
+              }
+            }}
           ></input>
           {/* {error} */}
         </div>

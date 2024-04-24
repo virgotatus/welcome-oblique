@@ -26,6 +26,8 @@ const Bgm = () => {
         {/* this hidden checkbox controls the state */}
         <input
           type="checkbox"
+          name="volumeTrigger"
+          id="volumeTrigger"
           ref={volumeTrigger}
           onClick={handleVolumeChange}
           className="hidden"
