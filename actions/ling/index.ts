@@ -51,7 +51,7 @@ export async function processTally(tally: TallyForm) {
     },
   })
   const AIres: LingResult = { id: ling.id, query: tally, answer: result, oblique: oblique };
-  console.log(tally.question, result);
+  console.log("LingSchoolx：",tally.question, result);
   if (status !== 200) {
     // catch error
     console.error(result + " chat completion error!");

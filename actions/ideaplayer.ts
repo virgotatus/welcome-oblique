@@ -27,7 +27,7 @@ export async function ideaSubmit(formData: FormData) {
     createtime: formData.get("gtime") as string,
     locale: formData.get("locale") as string,
   };
-  // TODO: validate datae
+  // TODO: validate data
   if (!(rawFormData.place && rawFormData.obj && rawFormData.createtime)) {
     return "error";
   }
@@ -49,7 +49,7 @@ export async function ideaSubmit(formData: FormData) {
       locale: rawFormData.locale,
     },
   })
-  console.log(result);
+  console.log("LianDanLu：", result);
   if (status !== 200) {
     // catch error
     console.error(result + " chat completion error!");

@@ -44,7 +44,10 @@ export const IdeaEmail = (result: IdeaResult) => {
               想再试试？
             </Button>
             <Hr style={hr} />
-            谢谢, 祝你心想事成~ ps.邮件可恢复。
+            <Text>
+              谢谢, 祝你心想事成~ <br />
+              ps.邮件可回复。
+            </Text>
           </Section>
         </Container>
       </Body>

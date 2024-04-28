@@ -41,7 +41,7 @@ export default function SendEmail({ contacts, notion_page }: Props) {
 
   useEffect(() => {
     toast({ title: state?.message, variant: "primary" });
-  }, [state]);
+  }, [state, toast]);
 
   return (
     <form action={formAction}>
