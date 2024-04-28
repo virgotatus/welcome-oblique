@@ -73,7 +73,7 @@ const Span = ({ element, ele_id }: { element: RichText; ele_id: number }) => {
             href={mentionLink(element.href)}
             className={cn([
               to_classname(element.annotations),
-              " text-[#004dcf]",
+              " text-[#004dcf] underline",
             ])}
           >
             {element.plain_text}
@@ -151,6 +151,14 @@ const Paragraph = ({ block, id }: { block: IBlock; id: number }) => {
       );
     case "divider":
       return <Hr style={hr} />;
+    case "quote":
+      return (
+        <blockquote style={quote}>
+          {richTexts?.map((element, ele_id) => (
+            <Span key={ele_id} element={element} ele_id={ele_id} />
+          ))}
+        </blockquote>
+      );
   }
 };
 
@@ -203,12 +211,21 @@ const paragraph = {
   fontSize: "16px",
   lineHeight: "24px",
   textAlign: "left" as const,
-  marginTop: "4px",
-  marginBottom: "2px",
+  marginBottom: "10px",
 };
 
 const footer = {
   color: "#8898aa",
   fontSize: "18px",
   lineHeight: "16px",
+};
+
+// "ml-4 indent-2 italic border-l-4 text-neutral-700 border-neutral-800"
+const quote = {
+  ...paragraph,
+  marginLeft: "1rem",
+  textIndent: "0.5rem",
+  italic: true,
+  borderLeft: "4px solid #262626",
+  color: "#404040",
 };

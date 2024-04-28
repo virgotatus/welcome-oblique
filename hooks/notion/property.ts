@@ -1,6 +1,6 @@
-import { isNotionClientError, APIErrorCode } from "@notionhq/client";
 import { cache } from "react";
-import { Notion } from "../../lib/notion/client";
+import { isNotionClientError, APIErrorCode } from "@notionhq/client";
+import { Notion } from "@/lib/notion/client";
 
 interface NotionPageProperty {
   object: []

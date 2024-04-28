@@ -39,7 +39,7 @@ export function middleware(request: NextRequest) {
   //   ].includes(pathname)
   // )
   //   return
-  // console.log("asda",pathname);
+
   if (
     ignorePrefixes.some((prefix) => pathname.startsWith(prefix))
   ) {

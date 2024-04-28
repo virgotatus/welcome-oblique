@@ -91,12 +91,19 @@ const MailParagraph = ({ block, id }: { block: IBlock; id: number }) => {
       );
     case "divider":
       return <hr></hr>;
+    case "quote":
+      return (
+        <blockquote className="ml-4 indent-2 italic border-l-4 text-neutral-700 border-neutral-800">
+          {richTexts?.map((element, ele_id) => (
+            <MailSpan key={ele_id} element={element} ele_id={ele_id} />
+          ))}
+        </blockquote>
+      );
   }
 };
 
 const MailContent = async ({ page_id }: { page_id: string }) => {
   const blocks = await getContent(page_id);
-
   return (
     <div key={page_id} className="border-red-500 border-2">
       {blocks!.map((block, id) => (

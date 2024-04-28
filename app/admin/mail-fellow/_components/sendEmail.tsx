@@ -37,7 +37,7 @@ export default function SendEmail({ contacts, notion_page }: Props) {
         variant="default"
         className="p-8 text-2xl border-orange-600 border-2 hover:bg-rose-600 hover:transition-colors duration-100"
         type="submit"
-        disabled={pending}
+        disabled={initialState.message === ""}
       >
         确定发送！
       </Button>

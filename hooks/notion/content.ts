@@ -5,11 +5,6 @@ import { Notion } from "@/lib/notion/client";
 // refer to https://github.com/makenotion/notion-sdk-js/blob/main/examples/parse-text-from-any-block-type/index.js
 
 
-const getPlainTextFromRichText = (richText : RichText[]) => {
-  return richText.map(t => t.plain_text).join("")
-  // Note: A page mention will return "Undefined" as the page name if the page has not been shared with the integration. See: https://developers.notion.com/reference/block#mention
-}
-
 // Get the plain text from any block type supported by the public API.
 export const getRichTextsFromBlock = (block:any): RichText[] => {
   let text
@@ -83,11 +78,7 @@ export const getRichTextsFromBlock = (block:any): RichText[] => {
     text = text + " (Has children)"
   }
   // Includes block type for readability. Update formatting as needed.
-  const raiseRichText : RichText[] =  [{
-    plain_text:text, type: block.type,
-    href: null
-  }]
-  return raiseRichText;
+  throw(`${text}, type: ${block.type}`);
 }
 
 const replaceListsItem = (blocks: IBlock[], 
@@ -116,7 +107,7 @@ const replaceListsItem = (blocks: IBlock[],
   return blocks;
 };
 
-async function fetchContent(block_id:string) :Promise<IBlock[]|undefined> {
+async function fetchContent(block_id:string) :Promise<IBlock[]> {
   try {
     const blocks:IBlock[] = [];
     let list_idx = 0;
@@ -139,14 +130,17 @@ async function fetchContent(block_id:string) :Promise<IBlock[]|undefined> {
           blocks.push(iblock as NumberedListBlock);
           break;
         case "bulleted_list_item":
-            blocks.push(iblock as BulletedListBlock);
-            break;
+          blocks.push(iblock as BulletedListBlock);
+          break;
         case "divider":
           blocks.push(iblock as Dividor);
           break;
+        case "quote":
+          blocks.push(iblock);
+          break
         default :
           blocks.push(iblock);
-          throw ("Notion block type parse error");
+          throw (`Notion block type parse error: ${iblock.type}`);
       }
     }
     // replace list item
@@ -157,16 +151,18 @@ async function fetchContent(block_id:string) :Promise<IBlock[]|undefined> {
       switch (error.code) {
         case APIErrorCode.ObjectNotFound:
           // ...
-          break
+          throw (`"Notion block object not found error, ${error.code}, ${error.message}`);
         case APIErrorCode.Unauthorized:
           // ...
-          break
+          throw (`"Notion token error, ${error.code}, ${error.message}`);
         // ...
         default:
           // you could even take advantage of exhaustiveness checking
           // assertNever(error.code)
+          throw (`"Notion error, ${error.code}, ${error.message}`);
       }
     }
+    throw (`unknown error, ${error}`);
   }
 }
 

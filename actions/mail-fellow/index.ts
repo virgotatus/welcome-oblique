@@ -1,5 +1,6 @@
 "use server";
 import MailFellowEmail from "@/emails/mail-fellow/MailFellow";
+import { getProperty } from "@/hooks/notion/property";
 import { redirect } from "next/navigation";
 import { Resend } from 'resend';
 
@@ -16,16 +17,16 @@ export async function sendSubmit(formData: FormData) {
 const resend = new Resend(process.env.Q24_RESEND_API_KEY);
 
 export async function sendMail(prevState: any, contacts: Contact[], notion_page: string) {
-
   console.log(contacts);
   console.log(notion_page);
+  const subject = await getProperty(notion_page, "title");
   for (const receiver of contacts) {
     console.log(receiver);
     const sended = await resend.emails.send({
       from: "Soro <soro@q24.io>",
       to: `${receiver.name} <${receiver.address}>`,
       // bcc: ["bob<bob@q24.io>","fori<forrest@q24.io>"],
-      subject: "第三封信：落入一个好的状态（今晚 9 点咕咕会）｜在业余公司各自玩",
+      subject: subject!,
       react: await MailFellowEmail(notion_page),
       reply_to: "s@q24.io",
       // attachments: attachments,
@@ -43,8 +44,8 @@ export async function sendMail(prevState: any, contacts: Contact[], notion_page:
         },
       ],
     });
-    prevState.message = `Sending email to <${receiver.name}> Succeed!!!`;
-    console.log(prevState.message)
+    const message = `Sending email to <${receiver.name}> Succeed!!!`;
+    console.log(message);
   }
   
   return {

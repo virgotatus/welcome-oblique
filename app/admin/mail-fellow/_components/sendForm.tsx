@@ -69,9 +69,13 @@ const SendForm = () => {
               <FormDescription>
                 收件人列表，格式为: #昵称 空格 #邮箱 换行 ， 如：
                 <br />
-                elon elon@q24.io
+                elon gong435491723@gmail.com
                 <br />
-                soro soro@q24.io
+                bob bob@q24.io
+                <br />
+                fori forrest@q24.io
+                <br />
+                fori fisfree.0@gmail.com
               </FormDescription>
               <FormMessage />
             </FormItem>

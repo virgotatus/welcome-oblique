@@ -25,7 +25,7 @@ export interface RichText {
   plain_text: string;
   href: string |null;
 }
-export const BlockTypes = ["paragraph", "heading_2","heading_3", "bulleted_list_item","numbered_list_item","divider","table"];
+export const BlockTypes = ["paragraph", "heading_2","heading_3", "bulleted_list_item","numbered_list_item","divider","table", "quote"];
 
 export interface IBlock {
   object: string;
