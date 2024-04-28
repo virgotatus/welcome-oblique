@@ -15,8 +15,21 @@ interface Props {
   notion_page: string;
 }
 
-export default function SendEmail({ contacts, notion_page }: Props) {
+const Submit = () => {
   const { pending } = useFormStatus();
+  return (
+    <Button
+      variant="default"
+      className="p-8 text-2xl border-orange-600 border-2 hover:bg-rose-600 hover:transition-colors duration-100"
+      type="submit"
+      disabled={initialState.message === "" || pending}
+    >
+      确定发送！
+    </Button>
+  );
+};
+
+export default function SendEmail({ contacts, notion_page }: Props) {
   const sendMailWithParams = sendMail.bind(
     null,
     initialState,
@@ -33,14 +46,7 @@ export default function SendEmail({ contacts, notion_page }: Props) {
   return (
     <form action={formAction}>
       {/* {toast(state?.message)} */}
-      <Button
-        variant="default"
-        className="p-8 text-2xl border-orange-600 border-2 hover:bg-rose-600 hover:transition-colors duration-100"
-        type="submit"
-        disabled={initialState.message === ""}
-      >
-        确定发送！
-      </Button>
+      <Submit />
     </form>
   );
 }

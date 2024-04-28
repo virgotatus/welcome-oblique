@@ -1,8 +1,6 @@
-"use client";
-import React from "react";
 import moment from "moment";
 import { ideaSubmit } from "@/actions/ideaplayer";
-import { useFormStatus } from "react-dom";
+import { InputSubmit, InputWithBgm } from "./InputWidgets";
 
 interface LabelProps {
   timeLabel: string;
@@ -17,7 +15,6 @@ const InputSection = ({
   objectLabel,
   locale,
 }: LabelProps) => {
-  const { pending } = useFormStatus();
   const ideaSubmitWith = ideaSubmit.bind(null);
 
   return (
@@ -39,23 +36,7 @@ const InputSection = ({
             readOnly={true}
           />
         </div>
-        <div className="flex justify-center items-center mb-5 ">
-          <label className="text-lg">{placeLabel} ：</label>
-          <input
-            type="city"
-            name="city"
-            className="textarea textarea-primary px-2 py-1 "
-            onFocus={() => {
-              const volume_trigger = document.getElementById(
-                "volumeTrigger"
-              ) as HTMLInputElement;
-              if (!volume_trigger?.checked) {
-                volume_trigger.click();
-              }
-            }}
-          ></input>
-          {/* {error} */}
-        </div>
+        <InputWithBgm placeLabel={placeLabel} />
         <div className="flex justify-center items-center mb-5">
           <label className="text-lg">{objectLabel} ：</label>
           <input
@@ -66,15 +47,7 @@ const InputSection = ({
           {/* {error} */}
         </div>
         <div className="flex justify-center items-center gap-4">
-          <button
-            type="submit"
-            className="inline-block text-2xl text-white bg-black hover:border-rose-800 hover:border-4 transition duration-1000 
-          m-2 w-auto px-12 py-5"
-            id="ask-button"
-            disabled={pending}
-          >
-            生成 (Generate)
-          </button>
+          <InputSubmit />
         </div>
       </form>
     </>

@@ -74,8 +74,6 @@ const SendForm = () => {
                 bob bob@q24.io
                 <br />
                 fori forrest@q24.io
-                <br />
-                fori fisfree.0@gmail.com
               </FormDescription>
               <FormMessage />
             </FormItem>

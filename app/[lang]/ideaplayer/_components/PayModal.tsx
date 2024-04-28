@@ -13,7 +13,6 @@ const PayModal = ({ label }: { label: string }) => {
         id="money-button"
         className=" box-border m-auto mt-4 block px-6"
         onClick={() => {
-          console.log("Buy me a Coffee!");
           const modal = document.getElementById(
             "money-modal"
           ) as HTMLDialogElement;

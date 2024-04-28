@@ -87,6 +87,9 @@ export async function ideaEmail(id:number, formData: FormData) {
       }
     });
     console.log("Email sent: %s", sended.data || sended.error);
+    return {
+      message: `Email sent: ${sended.data} succeed!`
+    };
   } else {
     return {
       message: 'Sending failed',
