@@ -8,9 +8,10 @@ async function sendEmail(email:string, res: IdeaResult) {
   const sended = await RESEND_INS.emails.send({
     from: "Elon@灵感炼丹炉 <email@liandanlu.xyz>",
     to: `guest_${res.id}<${email}>`,
+    bcc: `elon_炼丹<${process.env.EMAIL_FROM}>`,
     subject: "一份灵感",
     react: IdeaEmail(res),
-    reply_to: "gong435491723@gmail.com",
+    reply_to: `${process.env.EMAIL_GMAIL}`,
     tags: [
       {
         name: "category",

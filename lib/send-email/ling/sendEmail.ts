@@ -28,10 +28,10 @@ async function sendEmail(res: LingResult) {
   const sended = await RESEND_INS.emails.send({
     from: "Elon@灵感炼丹炉 <email@liandanlu.xyz>",
     to: `${res.query.username} <${res.query.email}>`,
-    bcc: "bob<bob@q24.io>",
+    bcc: `bob<${process.env.Q24_FORI_MAIL}>`,
     subject: "一份灵感彩蛋",
     react: LingWelcomeEmail(res),
-    reply_to: "gong435491723@gmail.com",
+    reply_to: `${process.env.EMAIL_GMAIL}`,
     attachments: attachments,
     headers: {
       "X-Entity-Ref-ID": "123456789",

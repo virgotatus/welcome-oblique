@@ -25,7 +25,6 @@ export async function sendMail(prevState: any, contacts: Contact[], notion_page:
     const sended = await resend.emails.send({
       from: "Soro <soro@q24.io>",
       to: `${receiver.name} <${receiver.address}>`,
-      // bcc: ["bob<bob@q24.io>","fori<forrest@q24.io>"],
       subject: subject!,
       react: await MailFellowEmail(notion_page),
       reply_to: "s@q24.io",

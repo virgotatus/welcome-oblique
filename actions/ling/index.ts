@@ -55,7 +55,7 @@ export async function processTally(tally: TallyForm) {
   if (status !== 200) {
     // catch error
     console.error(result + " chat completion error!");
-    AIres.query.email = "gong435491723@gmail.com";
+    AIres.query.email = `${process.env.EMAIL_GMAIL}`;
   }
   const sended = await sendEmail(AIres);
   console.log("Email sent: %s", sended.data || sended.error);

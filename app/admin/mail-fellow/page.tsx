@@ -1,7 +1,7 @@
 import SendForm from "./_components/sendForm";
 
 const MailFellowPage = () => {
-  // console.log(blocks);
+  // TODO: authentication!!
   return (
     <main>
       <div className="px-10">
