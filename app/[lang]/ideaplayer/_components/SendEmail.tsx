@@ -12,7 +12,7 @@ const SendEmail = () => {
   return (
     <form action={sendEmail}>
       <div
-        className="border-1 mt-4 flex w-1/2 justify-center m-auto
+        className="border-1 mt-4 flex justify-center m-auto
       rounded-md border-solid bg-white p-0.5 shadow-lg "
       >
         <input

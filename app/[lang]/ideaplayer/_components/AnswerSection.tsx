@@ -30,7 +30,7 @@ const AnswerSection = ({ oblique, description }: Answer) => {
   }
 
   return (
-    <section id="answer-show" className="text-center">
+    <section id="answer-show" className="text-left">
       <p id="answer-container">
         <strong>灵感(Oblique Strategies):</strong>
         <span id="oblique" className="italic">
