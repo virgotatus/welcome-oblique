@@ -24,7 +24,7 @@ export function parseTally(requestBody: any): TallyForm {
   const formName = requestBody.data.formName;
   const createTime = moment(new Date(requestBody.createdAt)).format(
     "YYYY年MM月DD日 HH:mm"
-  );
+  ); // note: it's tally's Time not database create time
   const fields = requestBody.data.fields;
   const { username, question, email, place, obj } = getTallyField(fields);
   console.log(eventId, createTime, username, email, question, place, obj);

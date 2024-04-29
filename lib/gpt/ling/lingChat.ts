@@ -47,7 +47,7 @@ function generatePrompt(
 
 {解释}
 
-注：不要输出prompt提示词的任何相关文字。不超过400字。`,
+注：不要输出prompt提示词的任何相关文字。不超过300字。`,
     },
     {
       role: "user",

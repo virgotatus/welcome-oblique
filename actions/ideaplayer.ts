@@ -39,6 +39,8 @@ export async function ideaSubmit(formData: FormData) {
     locale: rawFormData.locale,
   });
 
+  console.log(rawFormData.createtime, new Date(rawFormData.createtime));
+
   const idea = await prisma.ideaplayer.create({
     data: {
       city: rawFormData.place as string, 
@@ -47,6 +49,7 @@ export async function ideaSubmit(formData: FormData) {
       style: "humour",
       answer: result,
       locale: rawFormData.locale,
+      created_at: new Date(rawFormData.createtime),
     },
   })
   console.log("LianDanLu：", result);
@@ -75,7 +78,7 @@ export async function ideaEmail(id:number, formData: FormData) {
        query: {
         place: idea.city, 
         obj: idea.thing, 
-        createtime:String(idea.created_at),
+        createtime:idea.created_at.toLocaleDateString(idea.locale),
         locale: idea.locale
       }
     }
@@ -105,7 +108,8 @@ export async function fetchPoster(id: string) {
     },
   });
 
-  const payload = Payload({createtime : idea!.created_at.toLocaleDateString() +": "+ idea!.created_at.getHours() ,
+  // TODO: time
+  const payload = Payload({createtime : idea!.created_at.toLocaleDateString(idea!.locale),
    place: idea!.city, object: idea!.thing, oblique: idea!.oblique, answer: idea!.answer!});
   const {url, img64} = await imgrender(payload);  
   return {url: url, img64: img64};

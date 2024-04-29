@@ -21,7 +21,6 @@ export default async function Chat(
       model: "gpt-3.5-turbo",
       messages: messages,
       temperature: 0.6,
-      max_tokens: 512,
     });
     result = completion.choices[0].message.content!;
     status = 200;

@@ -22,7 +22,7 @@ export const IdeaEmail = (result: IdeaResult) => {
           <Section style={box}>
             <Text style={paragraph}>时间：{result.query.createtime}</Text>
             <Text style={paragraph}>场景：{result.query.place}</Text>
-            <Text style={paragraph}>物品：{result.query.obj}</Text>
+            <Text style={paragraph}>物体：{result.query.obj}</Text>
             <Hr style={hr} />
             <Text style={paragraph}>
               以下是灵感炼丹炉给出的一些提示，希望能带来一些帮助。

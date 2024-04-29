@@ -13,12 +13,12 @@ export function Payload({createtime, place, object, oblique, answer }: PayloadPr
       "texts": [
           {"text": "灵感炼丹炉", "x": 225, "y":320, "width": 300, "fontSize": 34, "lineHeight": 40, "font": "Alibaba-PuHuiTi-Medium"},
           {"text": "Stochastic Idea Player", "x": 145, "y":370, "width": 400, "fontSize": 32, "lineHeight": 40, "font": "Alibaba-PuHuiTi-Medium"},
-          {"text": `${createtime}`, "x": 30, "y":430, "width": 200, "fontSize": 20, "lineHeight": 30, "font": "SourceHanSansSC-Light"},
-          {"text": `场(Venue):${place}`, "x": 220, "y":430, "width": 200, "fontSize": 20, "lineHeight": 30, "font": "SourceHanSansSC-Light"},
-          {"text": `物(Object):${object}`, "x": 400, "y":430, "width": 200, "fontSize": 20, "lineHeight": 30, "font": "SourceHanSansSC-Light"},
+          {"text": `时间:${createtime}`, "x": 30, "y":430, "width": 200, "fontSize": 20, "lineHeight": 30, "font": "SourceHanSansSC-Light"},
+          {"text": `场景:${place}`, "x": 220, "y":430, "width": 200, "fontSize": 20, "lineHeight": 30, "font": "SourceHanSansSC-Light"},
+          {"text": `物体:${object}`, "x": 400, "y":430, "width": 200, "fontSize": 20, "lineHeight": 30, "font": "SourceHanSansSC-Light"},
           {"text": `灵感(Oblique Strategies): ${oblique.replaceAll("\\n", '\n')}`, "x": 30, "y":470, "width": 540, "fontSize": 20, "lineHeight": 30, "font":"SourceHanSansSC-Light"},
           {"text": `丹文(Description): ${answer.replaceAll("\\n", '\n') }`,
-              "x": 30, "y":530, "width": 540, "fontSize": 20, "lineHeight": 30, "font": "SourceHanSansSC-Light"}
+              "x": 30, "y":530, "width": 540, "fontSize": 16, "lineHeight": 27, "font": "SourceHanSansSC-Light"}
       ],
       "images": [
           {
