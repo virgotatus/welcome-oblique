@@ -27,10 +27,10 @@ const IdeaIdPage = async ({
         description={idea!.answer ? idea?.answer! : ""}
       />
       <section id="EndSection" className="mt-16 mb-32">
-        <Button className="mx-auto px-6 w-fit" asChild>
+        <Button className="mx-auto px-6 py-4 w-fit flex justify-center" asChild>
           <Link href="/ideaplayer">{dictionary.back}</Link>
         </Button>
-        <div className="flex flex-row gap-4 w-fit items-center">
+        <div className="flex flex-row gap-6 mx-auto px-6 py-3 w-fit justify-center items-center">
           <SendEmail />
           <SharePoster label={dictionary.poster} />
           <PayModal label={dictionary.fee} />
