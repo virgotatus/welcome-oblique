@@ -5,6 +5,7 @@ import {
   RichText,
   ListBlock,
   to_classname,
+  NotionImage,
 } from "@/hooks/notion/blockType";
 import { mentionLink } from "@/lib/utils";
 
@@ -38,6 +39,14 @@ const MailSpan = ({
 };
 
 const MailParagraph = ({ block, id }: { block: IBlock; id: number }) => {
+  if (block.type === "image") {
+    return (
+      <img
+        src={(block as NotionImage).image.file.url}
+        alt={`image_${block.id}`}
+      />
+    );
+  }
   const richTexts: RichText[] = getRichTextsFromBlock(block);
   // return the corresponding html element based on the block type
   switch (block.type) {

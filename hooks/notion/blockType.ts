@@ -25,7 +25,7 @@ export interface RichText {
   plain_text: string;
   href: string |null;
 }
-export const BlockTypes = ["paragraph", "heading_2","heading_3", "bulleted_list_item","numbered_list_item","divider","table", "quote"];
+export const BlockTypes = ["paragraph", "heading_2","heading_3", "bulleted_list_item","numbered_list_item","divider","table", "quote", "image"];
 
 export interface IBlock {
   object: string;
@@ -83,4 +83,12 @@ export interface BulletedListBlock extends IBlock {
 
 export interface Dividor extends IBlock {
   type: "divider";
+}
+
+export interface NotionImage extends IBlock {
+  type: "image";
+  image: {
+    type: "file";
+    file: {url: string};
+  }
 }

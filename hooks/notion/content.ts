@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { isNotionClientError, APIErrorCode, iteratePaginatedAPI } from "@notionhq/client";
-import { RichText, BlockTypes, IBlock, ParagraphBlock, Heading2Block, Heading3Block, NumberedListBlock, Dividor, BulletedListBlock, ListBlock } from "./blockType";
+import { RichText, BlockTypes, IBlock, ParagraphBlock, Heading2Block, Heading3Block, NumberedListBlock, Dividor, BulletedListBlock, ListBlock, NotionImage } from "./blockType";
 import { Notion } from "@/lib/notion/client";
 // refer to https://github.com/makenotion/notion-sdk-js/blob/main/examples/parse-text-from-any-block-type/index.js
 
@@ -138,6 +138,9 @@ async function fetchContent(block_id:string) :Promise<IBlock[]> {
         case "quote":
           blocks.push(iblock);
           break
+        case "image":
+          blocks.push(iblock as NotionImage);
+          break;
         default :
           blocks.push(iblock);
           throw (`Notion block type parse error: ${iblock.type}`);

@@ -1,6 +1,7 @@
 import {
   IBlock,
   ListBlock,
+  NotionImage,
   RichText,
   to_classname,
 } from "@/hooks/notion/blockType";
@@ -94,6 +95,14 @@ const Span = ({ element, ele_id }: { element: RichText; ele_id: number }) => {
 };
 
 const Paragraph = ({ block, id }: { block: IBlock; id: number }) => {
+  if (block.type === "image") {
+    return (
+      <Img
+        src={(block as NotionImage).image.file.url}
+        alt={`image_${block.id}`}
+      />
+    );
+  }
   const richTexts: RichText[] = getRichTextsFromBlock(block);
   // return the corresponding html element based on the block type
   switch (block.type) {

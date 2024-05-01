@@ -22,7 +22,7 @@ const Submit = () => {
       variant="default"
       className="p-8 text-2xl border-orange-600 border-2 hover:bg-rose-600 hover:transition-colors duration-100"
       type="submit"
-      disabled={initialState.message === "" || pending}
+      disabled={pending}
     >
       确定发送！
     </Button>
