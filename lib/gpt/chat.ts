@@ -8,6 +8,7 @@ const openai = new OpenAI({
 export interface ChatOutput {
   result: string;
   status: number;
+  oblique?: string;
 }
 
 export default async function Chat(

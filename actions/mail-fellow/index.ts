@@ -1,8 +1,11 @@
 "use server";
 import MailFellowEmail from "@/emails/mail-fellow/MailFellow";
-import { getProperty } from "@/hooks/notion/property";
+import { getProperty } from "@/hooks/notion/read";
 import { redirect } from "next/navigation";
 import { Resend } from 'resend';
+import { Enrollment } from "./tallyField";
+import { createPage, generateTextBlock } from "@/hooks/notion/create";
+import FellowChat from "@/lib/gpt/mail-fellow/FellowChat";
 
 export interface Contact {
   name: string;
@@ -49,5 +52,22 @@ export async function sendMail(prevState: any, contacts: Contact[], notion_page:
   
   return {
     message: `Sending email to <${contacts.map((receiver) => receiver.name).join(" , ")}> Succeed!!!`
+  }
+}
+
+
+export async function processEnroll(enroll: Enrollment, createTime: Date) {
+  const title = enroll.username + "_" + createTime.toLocaleDateString();
+  const month_id = await createPage({parent_id: process.env.Q24_NOTION_PARENT_PAGE!, title: title});
+  console.log(title);
+  for (var week of ["1","2","3","4"]) {
+    const title_week = "第" + week + "周";
+    const { result: content, status } = await FellowChat({
+      enroll: enroll
+    });
+    console.log(content);
+    const block = await generateTextBlock(content);
+    await createPage({parent_id: month_id!, title: title_week, children: [block]});
+    console.log(title_week);
   }
 }

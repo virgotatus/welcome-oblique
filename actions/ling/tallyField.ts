@@ -1,4 +1,5 @@
 import { Places } from "./constant";
+import { TallyField } from "@/hooks/tally/type";
 
 const TALLY_KEY = {
   email: "question_dWM1Ry",
@@ -7,17 +8,6 @@ const TALLY_KEY = {
   place: "question_68lzXY",
   object: "no need, place id + answer_idx",
 };
-
-interface optionType {
-  id: string;
-  text: string;
-}
-
-interface TallyField {
-  key: string;
-  value: string;
-  options?: optionType[];
-}
 
 
 function getPlace(unit: TallyField): { placeid: number; place: string } {

@@ -8,16 +8,13 @@ interface ChatProps {
   place: string;
 }
 
-export interface LingOutput extends ChatOutput {
-  oblique: string
-}
 
 export default async function LingChat({
   question,
   obj,
   place,
-}: ChatProps): Promise<LingOutput> {
-  let res : LingOutput = { result: "Please enter a valid question", oblique:"", status:400};
+}: ChatProps): Promise<ChatOutput> {
+  let res : ChatOutput = { result: "Please enter a valid question", oblique:"", status:400};
   if (question.trim().length === 0) {
     return res;
   }

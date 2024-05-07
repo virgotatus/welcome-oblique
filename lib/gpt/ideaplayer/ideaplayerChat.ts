@@ -9,17 +9,14 @@ interface ChatProps {
   locale: string;
 }
 
-export interface IdeaplayerOutput extends ChatOutput {
-  oblique: string;
-}
 
 export default async function IdeaplayerChat({
   place,
   obj,
   createtime,
   locale,
-}: ChatProps): Promise<IdeaplayerOutput> {
-  let res : IdeaplayerOutput = { result: "", oblique:"", status:400};
+}: ChatProps): Promise<ChatOutput> {
+  let res : ChatOutput = { result: "", oblique:"", status:400};
   // TODO: get Oblique by time seeds
   const oblique = getRandomOblique();
   const genPrompt = generatePrompt(obj, place, oblique, locale);

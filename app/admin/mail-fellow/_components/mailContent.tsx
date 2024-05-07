@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { getContent, getRichTextsFromBlock } from "@/hooks/notion/content";
+import { getContent, getRichTextsFromBlock } from "@/hooks/notion/read";
 import {
   IBlock,
   RichText,
   ListBlock,
   to_classname,
   NotionImage,
-} from "@/hooks/notion/blockType";
+} from "@/hooks/notion/read/blockType";
 import { mentionLink } from "@/lib/utils";
 
 const MailSpan = ({
@@ -74,7 +74,8 @@ const MailParagraph = ({ block, id }: { block: IBlock; id: number }) => {
           {<MailSpan element={richTexts!.at(0)!} ele_id={0} />}
         </h3>
       );
-    case "numbered_list_item" || "bulleted_list_item":
+    case "numbered_list_item":
+    case "bulleted_list_item":
       return richTexts?.map((element, ele_id) => (
         <MailSpan key={ele_id} element={element} ele_id={ele_id} />
       ));
@@ -89,6 +90,7 @@ const MailParagraph = ({ block, id }: { block: IBlock; id: number }) => {
         </ol>
       );
     case "bulleted":
+      console.log("bullet items counts:", (block as ListBlock).children.length);
       return (
         <ul key={`ul_${id}`}>
           {(block as ListBlock).children.map((listblock, list_id) => (
@@ -108,6 +110,8 @@ const MailParagraph = ({ block, id }: { block: IBlock; id: number }) => {
           ))}
         </blockquote>
       );
+    default:
+      throw new TypeError(`MailParagraph Unknown block type: ${block.type}`);
   }
 };
 

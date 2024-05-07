@@ -38,7 +38,6 @@ export default function SendEmail({ contacts, notion_page }: Props) {
   );
   const [state, formAction] = useFormState(sendMailWithParams, initialState);
   const { toast } = useToast();
-
   useEffect(() => {
     toast({ title: state?.message, variant: "primary" });
   }, [state, toast]);

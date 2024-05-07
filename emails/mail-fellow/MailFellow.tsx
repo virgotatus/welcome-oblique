@@ -4,8 +4,8 @@ import {
   NotionImage,
   RichText,
   to_classname,
-} from "@/hooks/notion/blockType";
-import { getContent, getRichTextsFromBlock } from "@/hooks/notion/content";
+} from "@/hooks/notion/read/blockType";
+import { getContent, getRichTextsFromBlock } from "@/hooks/notion/read";
 import { cn, mentionLink } from "@/lib/utils";
 import {
   Body,
@@ -130,7 +130,8 @@ const Paragraph = ({ block, id }: { block: IBlock; id: number }) => {
           {<Span element={richTexts!.at(0)!} ele_id={0} />}
         </Heading>
       );
-    case "numbered_list_item" || "bulleted_list_item":
+    case "numbered_list_item":
+    case "bulleted_list_item":
       return (
         <Text style={paragraph}>
           {richTexts?.map((element, ele_id) => (

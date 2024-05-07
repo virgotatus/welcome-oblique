@@ -50,7 +50,7 @@ export async function processTally(tally: TallyForm) {
       email: tally.email, username: tally.username, question: tally.question, place: tally.place, obj: tally.obj, content: result
     },
   })
-  const AIres: LingResult = { id: ling.id, query: tally, answer: result, oblique: oblique };
+  const AIres: LingResult = { id: ling.id, query: tally, answer: result, oblique: oblique! };
   console.log("LingSchoolx：",tally.question, result);
   if (status !== 200) {
     // catch error

@@ -14,6 +14,9 @@ export const getRichTextsFromBlock = (block:any): RichText[] => {
     return block[block.type].rich_text as RichText[];
   }
   // Get text for block types that don't have rich text
+  else if (block.type === "numbered" || block.type === "bulleted") {
+    return [];
+  }
   else {
     switch (block.type) {
       case "unsupported":
@@ -59,13 +62,6 @@ export const getRichTextsFromBlock = (block:any): RichText[] => {
         break
       case "breadcrumb":
       case "column_list":
-      case "divider":
-        text = "Divider"
-        break
-      case "numbered":
-      case "bulleted":
-        text = "listed"
-        break
       default:
         text = "[Unknown block type]"
         break
@@ -78,7 +74,7 @@ export const getRichTextsFromBlock = (block:any): RichText[] => {
     text = text + " (Has children)"
   }
   // Includes block type for readability. Update formatting as needed.
-  throw(`${text}, type: ${block.type}`);
+  throw new TypeError(`getRichTexts error: ${text}, type: ${block.type}`);
 }
 
 const replaceListsItem = (blocks: IBlock[], 
@@ -99,6 +95,7 @@ const replaceListsItem = (blocks: IBlock[],
       blocks.splice(i, j - i, {
         type: list_type.slice(0,8),
         children: bulletedListItems,
+        has_children: true,
       } as ListBlock);
     } else {
       i++;
@@ -143,7 +140,7 @@ async function fetchContent(block_id:string) :Promise<IBlock[]> {
           break;
         default :
           blocks.push(iblock);
-          throw (`Notion block type parse error: ${iblock.type}`);
+          throw new TypeError(`Notion block type parse error: ${iblock.type}`);
       }
     }
     // replace list item
@@ -154,18 +151,18 @@ async function fetchContent(block_id:string) :Promise<IBlock[]> {
       switch (error.code) {
         case APIErrorCode.ObjectNotFound:
           // ...
-          throw (`"Notion block object not found error, ${error.code}, ${error.message}`);
+          throw new TypeError(`"Notion block object not found error, ${error.code}, ${error.message}`);
         case APIErrorCode.Unauthorized:
           // ...
-          throw (`"Notion token error, ${error.code}, ${error.message}`);
+          throw new TypeError(`"Notion token error, ${error.code}, ${error.message}`);
         // ...
         default:
           // you could even take advantage of exhaustiveness checking
           // assertNever(error.code)
-          throw (`"Notion error, ${error.code}, ${error.message}`);
+          throw new TypeError(`"Notion error, ${error.code}, ${error.message}`);
       }
     }
-    throw (`unknown error, ${error}`);
+    throw new TypeError(`unknown error, ${error}`);
   }
 }
 
