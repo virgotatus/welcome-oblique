@@ -94,51 +94,43 @@ const Span = ({ element, ele_id }: { element: RichText; ele_id: number }) => {
   );
 };
 
+const mergeRichText = (richTexts: RichText[]) => {
+  return richTexts?.length === 0 ? (
+    <br />
+  ) : (
+    richTexts?.map((element, ele_id) => (
+      <Span ele_id={ele_id} key={ele_id} element={element} />
+    ))
+  );
+};
+
 const Paragraph = ({ block, id }: { block: IBlock; id: number }) => {
-  if (block.type === "image") {
-    return (
-      <Img
-        src={(block as NotionImage).image.file.url}
-        alt={`image_${block.id}`}
-      />
-    );
-  }
-  const richTexts: RichText[] = getRichTextsFromBlock(block);
   // return the corresponding html element based on the block type
   switch (block.type) {
+    case "image":
+      return (
+        <Img
+          src={(block as NotionImage).image.file.url}
+          alt={`image_${block.id}`}
+        />
+      );
     case "paragraph":
       return (
         <Text style={paragraph} key={`para_${id}`}>
-          {richTexts?.length === 0 ? (
-            <br />
-          ) : (
-            richTexts?.map((element, ele_id) => (
-              <Span ele_id={ele_id} key={ele_id} element={element} />
-            ))
-          )}
+          {mergeRichText(getRichTextsFromBlock(block))}
         </Text>
       );
     case "heading_2":
       return (
-        <Heading as="h2">
-          {<Span element={richTexts!.at(0)!} ele_id={0} />}
-        </Heading>
+        <Heading as="h2">{mergeRichText(getRichTextsFromBlock(block))}</Heading>
       );
     case "heading_3":
       return (
-        <Heading as="h3">
-          {<Span element={richTexts!.at(0)!} ele_id={0} />}
-        </Heading>
+        <Heading as="h3">{mergeRichText(getRichTextsFromBlock(block))}</Heading>
       );
     case "numbered_list_item":
     case "bulleted_list_item":
-      return (
-        <Text style={paragraph}>
-          {richTexts?.map((element, ele_id) => (
-            <Span key={ele_id} ele_id={ele_id} element={element} />
-          ))}
-        </Text>
-      );
+      return mergeRichText(getRichTextsFromBlock(block));
     case "numbered":
       return (
         <ol key={`ol_${id}`}>
@@ -164,9 +156,7 @@ const Paragraph = ({ block, id }: { block: IBlock; id: number }) => {
     case "quote":
       return (
         <blockquote style={quote}>
-          {richTexts?.map((element, ele_id) => (
-            <Span key={ele_id} element={element} ele_id={ele_id} />
-          ))}
+          {mergeRichText(getRichTextsFromBlock(block))}
         </blockquote>
       );
   }

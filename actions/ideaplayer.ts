@@ -45,7 +45,7 @@ export async function ideaSubmit(formData: FormData) {
     data: {
       city: rawFormData.place as string, 
       thing: rawFormData.obj as string,
-      oblique: oblique,
+      oblique: oblique!,
       style: "humour",
       answer: result,
       locale: rawFormData.locale,

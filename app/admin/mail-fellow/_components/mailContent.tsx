@@ -38,47 +38,43 @@ const MailSpan = ({
   );
 };
 
+const mergeRichText = (richTexts: RichText[]) => {
+  return richTexts.length === 0 ? (
+    <br></br>
+  ) : (
+    richTexts?.map((element, ele_id) => (
+      <MailSpan key={ele_id} element={element} ele_id={ele_id} />
+    ))
+  );
+};
+
 const MailParagraph = ({ block, id }: { block: IBlock; id: number }) => {
-  if (block.type === "image") {
-    return (
-      <img
-        src={(block as NotionImage).image.file.url}
-        alt={`image_${block.id}`}
-      />
-    );
-  }
-  const richTexts: RichText[] = getRichTextsFromBlock(block);
   // return the corresponding html element based on the block type
   switch (block.type) {
+    case "image":
+      return (
+        <img
+          src={(block as NotionImage).image.file.url}
+          alt={`image_${block.id}`}
+        />
+      );
     case "paragraph":
       return (
         <div key={`para_${id}`}>
-          {richTexts?.length === 0 ? (
-            <br></br>
-          ) : (
-            richTexts?.map((element, ele_id) => (
-              <MailSpan key={ele_id} element={element} ele_id={ele_id} />
-            ))
-          )}
+          {mergeRichText(getRichTextsFromBlock(block))}
         </div>
       );
     case "heading_2":
       return (
-        <h2 key={`h2_${id}`}>
-          {<MailSpan element={richTexts!.at(0)!} ele_id={0} />}
-        </h2>
+        <h2 key={`h2_${id}`}>{mergeRichText(getRichTextsFromBlock(block))}</h2>
       );
     case "heading_3":
       return (
-        <h3 key={`h3_${id}`}>
-          {<MailSpan element={richTexts!.at(0)!} ele_id={0} />}
-        </h3>
+        <h3 key={`h3_${id}`}>{mergeRichText(getRichTextsFromBlock(block))}</h3>
       );
     case "numbered_list_item":
     case "bulleted_list_item":
-      return richTexts?.map((element, ele_id) => (
-        <MailSpan key={ele_id} element={element} ele_id={ele_id} />
-      ));
+      return mergeRichText(getRichTextsFromBlock(block));
     case "numbered":
       return (
         <ol key={`ol_${id}`}>
@@ -105,9 +101,7 @@ const MailParagraph = ({ block, id }: { block: IBlock; id: number }) => {
     case "quote":
       return (
         <blockquote className="ml-4 indent-2 italic border-l-4 text-neutral-700 border-neutral-800">
-          {richTexts?.map((element, ele_id) => (
-            <MailSpan key={ele_id} element={element} ele_id={ele_id} />
-          ))}
+          {mergeRichText(getRichTextsFromBlock(block))}
         </blockquote>
       );
     default:
