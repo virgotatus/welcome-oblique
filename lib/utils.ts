@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function parseContacts(contacts: string) {
   let res: Contact[] = [];
-  contacts.split(/\r?\n/).map((line) => {
+  contacts.trim().split(/\r?\n/).map((line) => {
     const [name, address] = line.split(/\s+/);
     res.push({ name: name, address: address });
   });

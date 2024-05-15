@@ -12,7 +12,7 @@ function showText(
   index: number
 ) {
   if (index < message.length) {
-    const interval = Math.floor(Math.random() * 100 + 30);
+    const interval = Math.floor(Math.random() * 40 + 20);
     target.current?.append(message[index++]);
     setTimeout(function () {
       showText(target, message, index);

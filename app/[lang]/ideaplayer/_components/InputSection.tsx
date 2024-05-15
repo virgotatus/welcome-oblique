@@ -19,6 +19,14 @@ export const InputSubmit = () => {
           m-2 w-auto px-12 py-5 disabled:bg-slate-400"
       id="ask-button"
       disabled={pending}
+      onClick={() => {
+        const volume_trigger = document.getElementById(
+          "volumeTrigger"
+        ) as HTMLInputElement;
+        if (!volume_trigger?.checked) {
+          volume_trigger.click();
+        }
+      }}
     >
       {pending ? "炼丹中……" : "生成 (Generate)"}
     </button>
@@ -75,14 +83,6 @@ const InputSection = ({
             type="city"
             name="city"
             className="textarea textarea-primary px-2 py-1 "
-            onFocus={() => {
-              const volume_trigger = document.getElementById(
-                "volumeTrigger"
-              ) as HTMLInputElement;
-              if (!volume_trigger?.checked) {
-                volume_trigger.click();
-              }
-            }}
           ></input>
           {/* {error} */}
         </div>
