@@ -5,8 +5,6 @@ import {
   RichText,
   to_classname,
 } from "@/hooks/notion/read/blockType";
-import { getContent, getRichTextsFromBlock } from "@/hooks/notion/read";
-import { cn, mentionLink } from "@/lib/utils";
 import {
   Body,
   Button,
@@ -20,7 +18,11 @@ import {
   Tailwind,
   Link,
   Heading,
+  Row,
 } from "@react-email/components";
+import { getRichTextsFromBlock } from "@/hooks/notion/read";
+import { cn } from "@/lib/utils";
+import { mentionLink } from "@/utils/mail-fellow";
 
 interface SideCardProps {
   place: string;
@@ -95,13 +97,11 @@ const Span = ({ element, ele_id }: { element: RichText; ele_id: number }) => {
 };
 
 const mergeRichText = (richTexts: RichText[]) => {
-  return richTexts?.length === 0 ? (
-    <br />
-  ) : (
-    richTexts?.map((element, ele_id) => (
-      <Span ele_id={ele_id} key={ele_id} element={element} />
-    ))
-  );
+  return richTexts?.length === 0
+    ? ` `
+    : richTexts?.map((element, ele_id) => (
+        <Span ele_id={ele_id} key={ele_id} element={element} />
+      ));
 };
 
 const Paragraph = ({ block, id }: { block: IBlock; id: number }) => {
@@ -122,11 +122,15 @@ const Paragraph = ({ block, id }: { block: IBlock; id: number }) => {
       );
     case "heading_2":
       return (
-        <Heading as="h2">{mergeRichText(getRichTextsFromBlock(block))}</Heading>
+        <Heading as="h2" key={`h2_${id}`}>
+          {mergeRichText(getRichTextsFromBlock(block))}
+        </Heading>
       );
     case "heading_3":
       return (
-        <Heading as="h3">{mergeRichText(getRichTextsFromBlock(block))}</Heading>
+        <Heading as="h3" key={`h3_${id}`}>
+          {mergeRichText(getRichTextsFromBlock(block))}
+        </Heading>
       );
     case "numbered_list_item":
     case "bulleted_list_item":
@@ -162,19 +166,16 @@ const Paragraph = ({ block, id }: { block: IBlock; id: number }) => {
   }
 };
 
-export const MailFellowEmail = async (notion_page: string) => {
-  const blocks = await getContent(notion_page);
+export const MailFellowEmail = (blocks: IBlock[]) => {
   return (
     <Html>
       <Head />
       <Body style={main}>
-        {/* <Container style={container}>
-            <Section style={box}> */}
+        {/* <Container style={container}> <Section style={box}>*/}
         {blocks!.map((block, id) => (
           <Paragraph block={block} id={id} />
         ))}
-        {/* </Section>
-          </Container> */}
+        {/*</Section>  </Container> */}
       </Body>
     </Html>
   );
@@ -197,6 +198,7 @@ const container = {
 
 const box = {
   padding: "0 0px",
+  marginBottom: "2px",
 };
 
 const hr = {
@@ -207,11 +209,11 @@ const hr = {
 const paragraph = {
   // color: "#525f7f",
   color: "#000000",
-  whiteSpace: "pre-line",
+  whiteSpace: "pre-wrap", // note! 保留空白符和正常换行
   fontSize: "16px",
   lineHeight: "24px",
   textAlign: "left" as const,
-  marginBottom: "10px",
+  marginBottom: "2px",
 };
 
 const footer = {

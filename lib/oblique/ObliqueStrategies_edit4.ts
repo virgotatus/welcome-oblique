@@ -1,4 +1,3 @@
-import { cache } from 'react'
 const ObliquesRaw = `Abandon desire
 Abandon normal instructions
 Accept advice
