@@ -11,15 +11,17 @@ export interface ChatOutput {
   oblique?: string;
 }
 
+// mixtral-8x22b deepseek-chat claude
 export default async function Chat(
-  messages : OpenAI.ChatCompletionMessageParam[]
+  messages : OpenAI.ChatCompletionMessageParam[],
+  model : string = "gpt-3.5-turbo"
   ) : Promise<ChatOutput> 
 {
   let result = "";
   let status = 200;
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: model,
       messages: messages,
       temperature: 0.6,
     });

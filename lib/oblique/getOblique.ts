@@ -6,7 +6,6 @@ function getOblique(idx: number) {
 
 function getRandomOblique() {
   const randomIndex = Math.floor(Math.random() * Obliques.length);
-  console.log(Obliques.length, randomIndex);
   return Obliques[randomIndex];
 }
 
