@@ -1,6 +1,9 @@
 import { cache } from "react";
 import { isNotionClientError, APIErrorCode, iteratePaginatedAPI } from "@notionhq/client";
-import { RichText, BlockTypes, IBlock, ParagraphBlock, Heading2Block, Heading3Block, NumberedListBlock, Dividor, BulletedListBlock, ListBlock, NotionImage } from "./blockType";
+import {
+  RichText, RichTextBlockTypes, IBlock, ParagraphBlock, Heading2Block, Heading3Block,
+  NumberedListBlock, Dividor, BulletedListBlock, ListBlock, NotionImage, CalloutSoro 
+} from "../type";
 import { Notion } from "@/lib/notion/client";
 // refer to https://github.com/makenotion/notion-sdk-js/blob/main/examples/parse-text-from-any-block-type/index.js
 
@@ -9,7 +12,7 @@ import { Notion } from "@/lib/notion/client";
 export const getRichTextsFromBlock = (block:any): RichText[] => {
   let text
   // Get rich text from blocks that support it
-  if (BlockTypes.includes(block.type)) {
+  if (RichTextBlockTypes.includes(block.type)) {
     // This will be an empty string if it's an empty line.
     return block[block.type].rich_text as RichText[];
   }
@@ -104,7 +107,7 @@ const replaceListsItem = (blocks: IBlock[],
   return blocks;
 };
 
-async function fetchContent(block_id:string) :Promise<IBlock[]> {
+async function fetchContent(block_id:string, inplace_ulist=true) :Promise<IBlock[]> {
   try {
     const blocks:IBlock[] = [];
     let list_idx = 0;
@@ -138,13 +141,16 @@ async function fetchContent(block_id:string) :Promise<IBlock[]> {
         case "image":
           blocks.push(iblock as NotionImage);
           break;
+        case "callout":
+          blocks.push(iblock as CalloutSoro);
+          break;
         default :
           blocks.push(iblock);
           throw new TypeError(`Notion block type parse error: ${iblock.type}`);
       }
     }
     // replace list item
-    return replaceListsItem(replaceListsItem(blocks, "numbered_list_item"),"bulleted_list_item");
+    return inplace_ulist ? replaceListsItem(replaceListsItem(blocks, "numbered_list_item"),"bulleted_list_item") : blocks;
   } catch (error: unknown) {
     if (isNotionClientError(error)) {
       // error is now strongly typed to NotionClientError
@@ -167,6 +173,6 @@ async function fetchContent(block_id:string) :Promise<IBlock[]> {
 }
 
 export const getContent = cache(
-  async (block_id:string) => {
-    return await fetchContent(block_id)
+  async (block_id:string, inplace_ulist:boolean = true) => {
+    return await fetchContent(block_id, inplace_ulist);
 });

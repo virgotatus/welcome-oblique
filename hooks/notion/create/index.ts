@@ -2,52 +2,11 @@ import { Notion } from "@/lib/notion/client";
 import { APIErrorCode, isNotionClientError } from "@notionhq/client";
 import { BlockObjectRequest } from "@notionhq/client/build/src/api-endpoints";
 
-interface TextBlock {
-  object: "block";
-  type: "paragraph"| "heading2";
-  paragraph?: {
-    rich_text: [
-      {
-        type: "text";
-        text: {
-          content: string;
-        }
-      }
-    ]
-  }
-  heading2?: {
-    rich_text: [
-    {
-      type: "text";
-      text: {
-        content: string;
-      }
-    }
-  ]
-}
-}
-
-export async function generateTextBlock(content: string): Promise<TextBlock> {
-  return {
-    object: "block",
-    type: "paragraph",
-    paragraph: {
-      rich_text: [
-        {
-          type: "text",
-          text: {
-            content: content,
-          }
-        },
-      ],
-    },
-  };
-}
 
 interface Props {
   parent_id: string;
   title: string;
-  children?: TextBlock[];
+  children?: BlockObjectRequest[];
 }
 
 export async function createPage({parent_id, title, children}: Props) {
