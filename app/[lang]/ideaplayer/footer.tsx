@@ -23,7 +23,7 @@ const IdeaFooter = async () => {
         </a>
         {<b> · </b>} Project by{" "}
         <a
-          href="https://blog.elonarise.top/"
+          href="https://elon.liandanlu.xyz/"
           target="_blank"
           rel="noopener noreferrer"
           className="underline"

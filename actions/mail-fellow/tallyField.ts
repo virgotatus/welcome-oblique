@@ -7,6 +7,7 @@ const TALLY_KEY = {
   playselfAnswer: "9f6671bf-94c4-49f9-b8d5-c3b50a3c0211",
   goal: "question_KpaNXK",
   question: "question_J1WZy7",
+  city: "question_vXdvR8",
 };
 
 export interface Enrollment {
@@ -14,6 +15,7 @@ export interface Enrollment {
   email: string;
   question: string;
   goal: string;
+  city: string;
 } 
 
 function getTallyField(fields: TallyField[]) : Enrollment | null {
@@ -28,7 +30,8 @@ function getTallyField(fields: TallyField[]) : Enrollment | null {
   )!.value;
   const email = fields.find((field) => field.key === TALLY_KEY.email)!.value;
   const goal = fields.find((field) => field.key === TALLY_KEY.goal)!.value;
-  return { username, email, question, goal } ;
+  const city = fields.find((field) => field.key === TALLY_KEY.city)!.value;
+  return { username, email, question, goal, city } ;
 }
 
 export default getTallyField;

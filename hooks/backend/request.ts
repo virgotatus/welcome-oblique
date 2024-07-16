@@ -56,7 +56,7 @@ export async function fetchAmateur(username:string, query:string, city:string, t
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
     },
-    body: JSON.stringify({username: username, query: query, city: city, top_n: top_n})
+    body: JSON.stringify({username: username, query: query, city: city, top_n: top_n}),
   });
   const result = await response.json();
   return result as AmateurEmbed;

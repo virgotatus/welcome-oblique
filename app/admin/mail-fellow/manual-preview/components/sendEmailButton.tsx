@@ -29,7 +29,7 @@ const Submit = () => {
   );
 };
 
-export default function SendEmail({ contacts, notion_page }: Props) {
+export default function SendEmailButton({ contacts, notion_page }: Props) {
   const sendMailWithParams = sendMail.bind(
     null,
     initialState,

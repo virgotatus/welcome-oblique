@@ -4,7 +4,7 @@ import {
   NotionImage,
   RichText,
   to_classname,
-} from "@/hooks/notion/read/blockType";
+} from "@/hooks/notion/type";
 import {
   Body,
   Button,
@@ -108,9 +108,14 @@ const Paragraph = ({ block, id }: { block: IBlock; id: number }) => {
   // return the corresponding html element based on the block type
   switch (block.type) {
     case "image":
+      const img = block as NotionImage;
       return (
         <Img
-          src={(block as NotionImage).image.file.url}
+          src={
+            img.image.type === "file"
+              ? img.image.file?.url
+              : img.image.external?.url
+          }
           alt={`image_${block.id}`}
         />
       );

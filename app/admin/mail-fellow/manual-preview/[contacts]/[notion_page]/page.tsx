@@ -1,7 +1,7 @@
-import { parseContacts } from "@/lib/utils";
-import ContactTable from "@/app/admin/mail-fellow/_components/contactTable";
-import MailContent from "@/app/admin/mail-fellow/_components/mailContent";
-import SendEmail from "@/app/admin/mail-fellow/_components/sendEmail";
+import ContactTable from "@/app/admin/mail-fellow/manual-preview/components/contactTable";
+import MailContent from "@/app/admin/mail-fellow/manual-preview/components/mailContent";
+import SendEmailButton from "@/app/admin/mail-fellow/manual-preview/components/sendEmailButton";
+import { parseContacts } from "@/utils/mail-fellow";
 
 interface Props {
   contacts: string;
@@ -20,7 +20,7 @@ const PreviewPage = ({ params }: { params: Props }) => {
         <MailContent page_id={params.notion_page} />
       </section>
       <section className="flex justify-center w-full h-10 my-6">
-        <SendEmail contacts={contacts} notion_page={params.notion_page} />
+        <SendEmailButton contacts={contacts} notion_page={params.notion_page} />
       </section>
     </main>
   );

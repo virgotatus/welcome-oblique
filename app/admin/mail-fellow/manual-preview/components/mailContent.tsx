@@ -6,8 +6,8 @@ import {
   ListBlock,
   to_classname,
   NotionImage,
-} from "@/hooks/notion/read/blockType";
-import { mentionLink } from "@/lib/utils";
+} from "@/hooks/notion/type";
+import { mentionLink } from "@/utils/mail-fellow";
 
 const MailSpan = ({
   element,
@@ -52,15 +52,20 @@ const MailParagraph = ({ block, id }: { block: IBlock; id: number }) => {
   // return the corresponding html element based on the block type
   switch (block.type) {
     case "image":
+      const img = block as NotionImage;
       return (
         <img
-          src={(block as NotionImage).image.file.url}
+          src={
+            img.image.type === "file"
+              ? img.image.file?.url
+              : img.image.external?.url
+          }
           alt={`image_${block.id}`}
         />
       );
     case "paragraph":
       return (
-        <div key={`para_${id}`}>
+        <div key={`para_${id}`} className=" whitespace-pre-wrap">
           {mergeRichText(getRichTextsFromBlock(block))}
         </div>
       );

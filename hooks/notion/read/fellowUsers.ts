@@ -49,6 +49,7 @@ export async function query_user_by_name( name: string ) : Promise<UserRecord> {
 }
 
 export async function query_user_by_month( month: string ) :Promise<UserRecord[]> {
+  if (!month) return [];
   const response = await filterSelect(process.env.Q24_CONTACT_DATABASE!, "Month", month);
   const contacts: UserRecord[] = [];
   response?.forEach((res)=> {
