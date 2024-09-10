@@ -14,7 +14,7 @@ export interface ChatOutput {
 // mixtral-8x22b deepseek-chat claude
 export default async function Chat(
   messages : OpenAI.ChatCompletionMessageParam[],
-  model : string = "gpt-3.5-turbo"
+  model : string = "gpt-4-turbo"
   ) : Promise<ChatOutput> 
 {
   let result = "";
